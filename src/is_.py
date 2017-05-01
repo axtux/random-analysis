@@ -11,5 +11,8 @@ def is_string(var) :
 def is_int(var) :
   return type(0) == type(var)
 
+def is_float(var) :
+  return type(.0) == type(var)
+
 def is_bool(var) :
   return type(True) == type(var)
