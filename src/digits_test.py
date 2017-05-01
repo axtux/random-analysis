@@ -6,6 +6,14 @@ def count_digits(digits) :
   for i in range(0, 10) :
     count[i] = 0
   
+  if is_int(digits) or is_float(digits) :
+    digits = str(digits)
+  
+  try :
+    iter(digits)
+  except TypeError :
+    return print('digits is not iterable')
+  
   for d in digits :
     try :
       int_d = int(d)
