@@ -24,7 +24,7 @@ def plot(data, file_name='image', chart_name='Chart', x_name='X Axis', y_name='Y
   )
   # plot to file
   fig = Figure(data=data, layout=layout)
-  plotly.offline.plot(fig, filename=file_name+'.html', image='png', image_filename=file_name, image_height=1200, image_width=1600)
+  plotly.offline.plot(fig, filename=file_name+'.html', auto_open=False, image='png', image_filename=file_name, image_height=1200, image_width=1600)
 
 """
 plot barchart from
@@ -53,7 +53,7 @@ def histo(data, file_name='image', chart_name='Chart', x_name='X Axis', y_name='
   
   # plot to file
   fig = Figure(data=data, layout=layout)
-  plotly.offline.plot(fig, filename=file_name+'.html', image='png', image_filename=file_name, image_height=1200, image_width=1600)
+  plotly.offline.plot(fig, filename=file_name+'.html', auto_open=False, image='png', image_filename=file_name, image_height=1200, image_width=1600)
 
 """
   From :
