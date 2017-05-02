@@ -86,9 +86,14 @@ def test(observed, expected) :
   
   x = 0
   corr = -0.5 if df == 1 else 0
-  print('df is {}, corr is {}'.format(df, corr))
+  
   for o, e in zip(observed, expected) :
+    if e == 0 :
+      print('skipping values {}, {} because expected is 0'.format(o, e))
+      continue
     x = x + (o - e + corr)**2/e
+  
+  x = round(x, 3)
   
   results = {}
   for alpha in table.keys() :
