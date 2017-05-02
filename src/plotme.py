@@ -1,6 +1,5 @@
 import plotly
 from plotly.graph_objs import Bar, Figure, Scatter, Layout
-from plotly.figure_factory import create_distplot
 
 """
   Plot an array like
