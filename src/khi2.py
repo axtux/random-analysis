@@ -1,4 +1,20 @@
 table = {
+  '0.1' : {
+     1 :  2.706,
+     2 :  4.605,
+     3 :  6.251,
+     4 :  7.779,
+     5 :  9.236,
+     6 : 10.645,
+     7 : 12.017,
+     8 : 13.362,
+     9 : 14.684,
+    10 : 15.987,
+    11 : 17.275,
+    12 : 18.549,
+    13 : 19.812,
+    14 : 21.064,
+  },
   '0.05' : {
      1 :  3.841,
      2 :  5.991,
@@ -49,14 +65,14 @@ table = {
   },
 }
 
-def khi2(alpha, ddl) :
+def khi2(alpha, df) :
   alpha = str(alpha)
   if not alpha in table :
     return print('alpha {} not in table'.format(alpha))
-  ddl = int(ddl)
-  if not ddl in table[alpha] :
-    return print('ddl {} not in table'.format(ddl))
-  return table[alpha][ddl]
+  df = int(df)
+  if not df in table[alpha] :
+    return print('df {} not in table'.format(df))
+  return table[alpha][df]
 
 def test(observed, expected) :
   ol = len(observed)
@@ -64,18 +80,19 @@ def test(observed, expected) :
   if not ol == el :
     return print('observed length {} must match expected length {}'.format(ol, el))
   
-  ddl = ol - 1
-  if ddl < 1 :
-    return print('degree of freedom {} must be at least 1'.format(ddl))
+  df = ol - 1
+  if df < 1 :
+    return print('degree of freedom {} must be at least 1'.format(df))
   
   x = 0
-  corr = -0.5 if ddl == 1 else 0
+  corr = -0.5 if df == 1 else 0
+  print('df is {}, corr is {}'.format(df, corr))
   for o, e in zip(observed, expected) :
     x = x + (o - e + corr)**2/e
   
   results = {}
   for alpha in table.keys() :
-    limit = khi2(alpha, ddl)
+    limit = khi2(alpha, df)
     results[alpha] = (x, limit, x < limit)
   
   return results
