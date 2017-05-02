@@ -6,9 +6,11 @@ if digits == None :
   exit('Need digits from pi module')
 
 l = len(digits)
+
+# number of digits to use to make random number
 path = 15
 
-# duplicate some digits to get path digits at the end
+# when i is l-1, you should still get path digits
 digits = digits + digits[:path]
 
 # add randomness to start point with ms time
@@ -16,7 +18,7 @@ i = int(time.time()*1000) % l
 
 def random() :
   global i
-  # IDEA get path from pi digits ?
+  
   i = (i+path)%l
   
   s = digits[i:i+path]
