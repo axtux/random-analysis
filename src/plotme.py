@@ -1,33 +1,7 @@
 import plotly
 from plotly.graph_objs import Bar, Figure, Scatter, Layout
 
-"""
-  Plot an array like
-  { x : [y1, y2, y3], ...
-  { 1 : [val1, val2, val3],
-    2 : [val1, val2, val3],
-    ...
-  }
-"""
-def plot(data, file_name='image', chart_name='Chart', x_name='X Axis', y_name='Y Axis', trace_names=[]) :
-  (x, y) = data
-  data = []
-  # create data object from traces
-  for name in y :
-    data.append(Scatter(x=x, y=y[name], mode='lines+markers', name=name))
-  
-  # name axes
-  layout = Layout(
-      title=chart_name,
-      xaxis=dict(title=x_name),
-      yaxis=dict(title=y_name)
-  )
-  # plot to file
-  fig = Figure(data=data, layout=layout)
-  plotly.offline.plot(fig, filename=file_name+'.html', auto_open=False, image='png', image_filename=file_name, image_height=1200, image_width=1600)
-
-"""
-plot barchart from
+"""plot linechart from
 (
   [x1, x2, x3],
   {
@@ -36,24 +10,51 @@ plot barchart from
   }
 )
 """
-def histo(data, file_name='image', chart_name='Chart', x_name='X Axis', y_name='Y Axis') :
+def linechart(data, name='', x_name='X Axis', y_name='Y Axis') :
   (x, y) = data
   data = []
   # create data object from traces
-  for name in y :
-    data.append(Bar(x=x, y=y[name], name=name))
+  for trace_name in y :
+    data.append(Scatter(x=x, y=y[trace_name], mode='lines+markers', name=trace_name))
+  name += ' Line Chart'
   
   # name axes
   layout = Layout(
-      title=chart_name,
+      title=name,
+      xaxis=dict(title=x_name),
+      yaxis=dict(title=y_name)
+  )
+  
+  # plot to file
+  offline_plot(name, data, layout)
+
+"""plot barchart from
+(
+  [x1, x2, x3],
+  {
+    'data1' : [y1, y2, y3],
+    'data2' : [y1, y2, y3],
+  }
+)
+"""
+def barchart(data, name='', x_name='X Axis', y_name='Y Axis') :
+  (x, y) = data
+  data = []
+  # create data object from traces
+  for trace_name in y :
+    data.append(Bar(x=x, y=y[trace_name], name=trace_name))
+  name += ' Bar Chart'
+  
+  # name axes
+  layout = Layout(
+      title=name,
       xaxis=dict(title=x_name),
       yaxis=dict(title=y_name),
       barmode='group'
   )
   
   # plot to file
-  fig = Figure(data=data, layout=layout)
-  plotly.offline.plot(fig, filename=file_name+'.html', auto_open=False, image='png', image_filename=file_name, image_height=1200, image_width=1600)
+  offline_plot(name, data, layout)
 
 """
   From :
@@ -72,7 +73,7 @@ def histo(data, file_name='image', chart_name='Chart', x_name='X Axis', y_name='
     }
   )
 """
-def split_data(data, names) :
+def split_data(data, names):
   x = list(data.keys())
   
   # create y list for each value
@@ -86,3 +87,14 @@ def split_data(data, names) :
       y[names[i]].append(data[k][i])
   
   return (x, y)
+
+def offline_plot(name, data, layout):
+  file_name = filename(name)
+  
+  fig = Figure(data=data, layout=layout)
+  
+  plotly.offline.plot(fig, filename=file_name+'.html', auto_open=False, image='png', image_filename=file_name, image_height=1200, image_width=1600)
+
+def filename(chart_name):
+  """lowercase and replace space by underscore"""
+  return str(chart_name).lower().replace(' ', '_')
