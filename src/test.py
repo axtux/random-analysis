@@ -1,7 +1,7 @@
 from pprint import pprint
 import khi2
 import plotme
-
+from _is_ import is_float
 
 def expected_uniform(observed) :
   """Get expected uniform classes from observed classes"""
@@ -30,7 +30,19 @@ def make_test(observed, expected, name='', plot=True) :
   
   
   k = khi2.test(y['observed'], y['expected'])
-  pprint(k)
+  result = {}
+  result['alpha'] = []
+  result['value'] = []
+  result['limit'] = []
+  result['result'] = []
+  
+  for alpha in k :
+    result['alpha'].append(alpha)
+    result['value'].append(k[alpha][0])
+    result['limit'].append(k[alpha][1])
+    result['result'].append('success' if k[alpha][2] else 'failure')
+  
+  display(result)
   
   if plot :
     plotme.linechart((x, y), name)
@@ -50,7 +62,10 @@ def display(dic) :
     # make row
     row = []
     for k in head :
-      row.append(display_number(dic[k][i]))
+      data = dic[k][i]
+      if is_float(data) :
+        data = round(data, 3)
+      row.append(str(data))
     
     # save it
     table.append(row)
@@ -78,10 +93,6 @@ def display(dic) :
     print(line)
   
   print(separator)
-
-def display_number(n) :
-  return str(round(n, 3))
-
 
 def left_pad(string, size, character=' ') :
   to_pad = size - len(string)
