@@ -16,10 +16,10 @@ def init():
   if digits == None :
     exit('Need digits from pi module')
   l = len(digits)
-
+  
   # set default path to 15
   set_path(15)
-
+  
   # add randomness to start point with ms time
   i = int(time.time()*1000) % l
 
