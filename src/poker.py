@@ -1,8 +1,7 @@
 
-"""
-count the number of different digits in each seq_len-digits sequence
-"""
-def count(digits, seq_len = 10) :
+
+def count(digits, seq_len = 5) :
+  """count the number of different digits in each seq_len-digits sequence"""
   count = {}
   for i in range(1, seq_len+1) :
     count[i] = 0
@@ -18,10 +17,9 @@ def count(digits, seq_len = 10) :
 def count_different(sequence) :
   return len(set(sequence))
 
-"""
-number of manner to make r groups with k choices
-"""
+
 def stirling(k, r) :
+  """number of manner to make r groups with k choices"""
   if k < 1 or r < 1 or r > k :
     return None
   
@@ -30,10 +28,9 @@ def stirling(k, r) :
   
   return stirling(k-1, r-1) + r*stirling(k-1, r)
 
-"""
-probability to get r different elements within l-length sequence with k choices
-"""
+
 def probability(k, r, l) :
+  """probability to get r different elements within l-length sequence with k choices"""
   p = stirling(l, r)
   for i in range(k-r+1, k+1) :
     p = p * i
@@ -58,4 +55,4 @@ if __name__ == "__main__" :
   observed = count(digits)
   expected = expected_probability(observed)
   import test
-  test.make_test(observed, expected)
+  test.make_test(observed, expected, 'Poker')
