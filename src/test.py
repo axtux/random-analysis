@@ -18,7 +18,7 @@ def expected_uniform(observed) :
   
   return expected
 
-def make_test(observed, expected, plot=True) :
+def make_test(observed, expected, name='', plot=True) :
   from pprint import pprint
   
   x = list(observed.keys())
@@ -31,4 +31,5 @@ def make_test(observed, expected, plot=True) :
   pprint(k)
   
   if plot :
-    plotme.plot((x, y))
+    plotme.linechart((x, y), name)
+    plotme.barchart((x, y), name)
