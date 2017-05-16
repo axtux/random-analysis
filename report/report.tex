@@ -1,0 +1,97 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+	\pagestyle{fancy}
+	\fancyhf{}
+	\rhead{SALEMI Marco, LECOCQ Alexis}
+	\lhead{Pi randomness}
+	\cfoot{\thepage}
+	
+	\begin{titlepage}
+		\begin{sffamily}
+			\begin{center}
+				% Upper part of the page. The '~' is needed because \\
+				% only works if a paragraph has started.
+				\includegraphics[scale=1.5]{images/pi.png}~\\[1.5cm]
+				
+				% Title
+				\HRule \\[0.5cm]
+				{ \huge \bfseries Pi randomness\\[0.4cm] }
+				\HRule \\[1.5cm]
+				
+				\Large{Rapport de projet de simulation}\\[2cm]
+				
+				\Large{Année académique 2016-2017}\\[2cm]
+				
+				% Author and supervisor
+				\begin{minipage}{0.4\textwidth}
+					\begin{flushleft} \large
+						\emph{\textbf{Auteurs :}}\\
+						SALEMI Marco\\
+						LECOCQ Alexis
+					\end{flushleft}
+				\end{minipage}
+				\begin{minipage}{0.4\textwidth}
+					\begin{flushright} \large
+						\emph{\textbf{Directeurs :}}\\
+						BUYS Alain\\
+						-\\
+					\end{flushright}
+				\end{minipage}
+				
+				\vfill
+				
+				% Bottom of the page
+				{\large \today}
+				
+			\end{center}
+		\end{sffamily}
+	\end{titlepage}
+	
+	\newpage
+	\tableofcontents
+	
+	\newpage
+	\section{Introduction}
+	Dans le cadre du cours de simulation, nous avons été amenés à réaliser un projet afin de mettre en pratique la théorie vue au cours.
+	
+	Les objectifs du projet sont :
+	\begin{enumerate}
+		\item analyser le caractère aléatoire des décimales de pi par des tests vus au cours ;
+		\item utiliser ces décimales pour construire un générateur de loi uniforme dans l'intervalle [0, 1[ ;
+		\item comparer le générateur du point 2 avec celui utilisé par défaut dans Python.
+	\end{enumerate}
+	
+	Pour ce faire, un fichier nous est fourni. Celui-ci contient les 1 000 000 premières décimales du nombre pi.
+	
+	Le projet doit être réalisé en python et nous avons opté pour la version 3.
+	
+	\newpage
+	\section{Les décimales de pi}
+	
+	\subsection{Test de khi2}
+	Le premier test consiste à étudier le nombre d'apparitions de chaque décimale. Le résultat aléatoire attendu, c'est que l'ensemble des décimales apparaissent exactement le même nombre de fois.
+	
+	\newpage
+	\section{Conclusion}
+	Nous avons bien réalisé les objectifs fixés dans l'introduction, à savoir analyser le caractère aléatoire des décimales de pi, construire un générateur uniforme et le comparer au générateur par défaut de Python.
+	
+	Nous avons ainsi eu l'occasion de mettre en pratique et d'approfondir les concepts vus au cours théorique notamment les test de khi2, ...
+	% TODO complete tests
+	
+	Nous tenons à remercier le titulaire BUYS Alain pour le dévouement dont il a fait preuve cette année.
+	
+\end{document}
