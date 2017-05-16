@@ -23,7 +23,7 @@ def random() :
   
   s = digits[i:i+path]
   
-  return int(s)* 10**(-path)
+  return int(s) * 10**(-path)
 
 
 if __name__ == "__main__" :
