@@ -17,39 +17,38 @@ def expected_uniform(observed) :
   
   return expected
 
-def make_test(observed, expected, name='', plot=True) :
+def make_test(observed, expected, name='', x_name='', y_name='') :
   x = list(observed.keys())
   
   y = {}
-  y['observed'] = list(observed.values())
-  y['expected'] = list(expected.values())
+  y['Valeur observée'] = list(observed.values())
+  y['Valeur attendue'] = list(expected.values())
   
   disp = dict(y)
-  disp['X'] = x
-  display(disp)
+  disp['A'+name] = x
+  display(disp, name)
   
   
-  k = khi2.test(y['observed'], y['expected'])
+  k = khi2.test(y['Valeur observée'], y['Valeur attendue'])
   result = {}
-  result['alpha'] = []
-  result['value'] = []
-  result['limit'] = []
-  result['result'] = []
+  result['$\\alpha$'] = []
+  result['AValeur'] = []
+  result['Limite'] = []
+  result['Résultat'] = []
   
   for alpha in sorted(k.keys()) :
-    result['alpha'].append(alpha)
-    result['value'].append(k[alpha][0])
-    result['limit'].append(k[alpha][1])
-    result['result'].append('success' if k[alpha][2] else 'failure')
+    result['$\\alpha$'].append(alpha)
+    result['AValeur'].append(k[alpha][0])
+    result['Limite'].append(k[alpha][1])
+    result['Résultat'].append('réussi' if k[alpha][2] else 'échoué')
   
-  display(result)
+  display(result, '$\\chi^2$')
   
-  if plot :
-    plotme.linechart((x, y), name)
-    plotme.barchart((x, y), name)
-  
+  plotme.linechart((x, y), name, x_name, y_name)
+  plotme.barchart((x, y), name, x_name, y_name)
 
-def display(dic) :
+
+def display(dic, name='') :
   head = sorted(dic.keys())
   if len(head) < 1 :
     return
@@ -94,10 +93,10 @@ def display(dic) :
   
   print(separator)
   
-  print(latex_format(head, table))
+  print(latex_format(name, head, table))
 
-def latex_format(head, table) :
-  
+def latex_format(name, head, table) :
+  # tabular
   s = '\\begin{figure}[h]\n'
   s += '\\centering\n'
   s += '\\begin{tabular}{|'
@@ -117,8 +116,19 @@ def latex_format(head, table) :
   s += '\\hline\n'
   
   s += '\\end{tabular}\n'
-  s += '\\caption{NAME\\_HERE}\n'
+  s += '\\caption{Tableau de '+name+'}\n'
   s += '\\end{figure}\n'
+  
+  s+= '\n'
+  
+  # image
+  s += '\\begin{figure}[h]\n'
+  s += '\\centering\n'
+  image_name = '../chart_images/'+plotme.filename(name)+'_bar_chart.png'
+  s += '\\includegraphics[scale=0.25]{'+image_name+'}\n'
+  s += '\\caption{Graphique de '+name+'}\n'
+  s += '\\end{figure}\n'
+  
   return s
 
 def left_pad(string, size, character=' ') :
