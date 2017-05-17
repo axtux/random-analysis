@@ -205,19 +205,25 @@
 	
 	Afin que le générateur ne commence pas toujours la séquence au même emplacement, nous choisissons l'emplacement de départ en fonction d'un timestamp. Ce timestamp représente le nombre de millisecondes écoulées depuis le 1er janvier 1970 UTC.
 	
+	La période de ce générateur est de 200 000. En effet, si le premier nombre est extrait du début du fichier, après 66 667 ($\lceil\frac{1 000 000}{15}\rceil$) mouvements de 15 caractères, nous nous retrouvons à 5 caractères plus loin qu'initialement. Après 66 667 mouvements, nous nous retrouvons 10 caractères plus loin. Si après 66 667 mouvements, nous aurions été 15 cratères plus loin, après 66 666 mouvements, nous revenons au point initial. Nous avons donc lu 3*66 666 +2 nombres aléatoires avant de relire le premier.
+	
 	\newpage
 	\section{Comparaison avec le générateur par défaut de Python}
 	Nous allons effectuer les tests vu au cours à la fois sur notre générateur et sur le générateur de python afin d'obtenir un indice de comparaison.
 	
 	\subsection{Test de $\chi^2$}
 	
-	Malgré sa simplicité, ce générateur donne de très bons résultats.
+	\newpage
+	\subsection{Interprétation des tests}
+	Malgré la simplicité de notre générateur, celui-ci donne de très bons résultats. Cela peut s'expliquer par le fait que nous n'avons effectué nos tests que sur les 1 000 000 premiers nombres aléatoires. En effet, la période de notre générateur est de 200 000 alors que la période du Mersenne Twister (utilisé par défaut dans python) est de $2^{19937}$.
+	
+	D'après les tests effectués ci-dessus, ... % TODO
 	
 	\newpage
 	\section{Conclusion}
 	Nous avons bien réalisé les objectifs fixés dans l'introduction, à savoir analyser le caractère aléatoire des décimales de pi, construire un générateur uniforme et le comparer au générateur par défaut de Python.
 	
-	Nous avons ainsi eu l'occasion de mettre en pratique et d'approfondir les concepts vus au cours théorique notamment les test de khi2, ...
+	Nous avons ainsi eu l'occasion de mettre en pratique et d'approfondir les concepts vus au cours théorique notamment les test de khi2, le test du poker, le test de Kolmogorov-Smirnov, ...
 	% TODO complete tests
 	
 	Nous tenons à remercier le titulaire BUYS Alain pour le dévouement dont il a fait preuve cette année.
