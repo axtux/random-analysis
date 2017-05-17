@@ -55,4 +55,4 @@ if __name__ == "__main__" :
   observed = count(digits)
   expected = expected_probability(observed)
   import test
-  test.make_test(observed, expected, 'Poker')
+  test.make_test(observed, expected, 'Poker', 'Digits différents', 'Nombre d\'apparitions')
