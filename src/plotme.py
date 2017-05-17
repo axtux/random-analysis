@@ -96,11 +96,11 @@ def offline_plot(name, data, layout):
   
   fig = Figure(data=data, layout=layout)
   
-  plotly.offline.plot(fig, filename=file_name+'.html', auto_open=False, image='png', image_filename=file_name, image_height=1200, image_width=1600)
+  plotly.offline.plot(fig, filename=DIR_CHARTS+'/'+file_name+'.html', auto_open=False, image='png', image_filename=file_name, image_height=1200, image_width=1600)
 
 def filename(chart_name):
   """lowercase and replace space by underscore"""
-  return DIR_CHARTS+'/'+str(chart_name).lower().replace(' ', '_')
+  return str(chart_name).lower().replace(' ', '_').replace('é', 'e').replace('è', 'e').replace('ç', 'c').replace('à', 'a')
 
 def init() :
   try :
