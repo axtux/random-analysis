@@ -24,10 +24,10 @@ def count_digits(digits) :
     count[int_d] = count[int_d] + 1
   
   return count
-  
+
 if __name__ == "__main__" :
   import pi
   digits = pi.get_digits()
   observed = count_digits(digits)
   expected = expected_uniform(observed)
-  make_test(observed, expected, 'Khi2')
+  make_test(observed, expected, 'Décimales', 'Décimales', 'Nombre de décimales')
