@@ -1,5 +1,8 @@
+import os
 import plotly
 from plotly.graph_objs import Bar, Figure, Scatter, Layout
+
+DIR_CHARTS='../charts'
 
 """plot linechart from
 (
@@ -97,4 +100,12 @@ def offline_plot(name, data, layout):
 
 def filename(chart_name):
   """lowercase and replace space by underscore"""
-  return str(chart_name).lower().replace(' ', '_')
+  return DIR_CHARTS+'/'+str(chart_name).lower().replace(' ', '_')
+
+def init() :
+  try :
+    os.makedirs(DIR_CHARTS)
+  except OSError :
+    pass
+
+init()
