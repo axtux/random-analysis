@@ -1,4 +1,6 @@
 from _is_ import *
+import pi
+from test import expected_uniform, make_test
 
 def count_digits(digits) :
   # init count dictionary
@@ -26,6 +28,6 @@ def count_digits(digits) :
 if __name__ == "__main__" :
   import pi
   digits = pi.get_digits()
-  count = count_digits(digits)
-  from pprint import pprint
-  pprint(count)
+  observed = count_digits(digits)
+  expected = expected_uniform(observed)
+  make_test(observed, expected, 'Khi2')
