@@ -18,6 +18,17 @@ def expected_uniform(observed) :
   return expected
 
 def make_test(observed, expected, name='', x_name='', y_name='') :
+  """expect observed and expected to be dictionaries. Example :
+  observed = {
+    x1 : observed_y1,
+    x2 : observed_y2,
+  }
+  expected = {
+    x1 : expected_y1,
+    x2 : expected_y2,
+  }
+  
+  """
   x = list(observed.keys())
   
   y = {}
