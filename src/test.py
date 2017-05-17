@@ -36,7 +36,7 @@ def make_test(observed, expected, name='', plot=True) :
   result['limit'] = []
   result['result'] = []
   
-  for alpha in k :
+  for alpha in sorted(k.keys()) :
     result['alpha'].append(alpha)
     result['value'].append(k[alpha][0])
     result['limit'].append(k[alpha][1])
@@ -93,6 +93,33 @@ def display(dic) :
     print(line)
   
   print(separator)
+  
+  print(latex_format(head, table))
+
+def latex_format(head, table) :
+  
+  s = '\\begin{figure}[h]\n'
+  s += '\\centering\n'
+  s += '\\begin{tabular}{|'
+  for h in head :
+    s += 'r|'
+  s += '}\n'
+  
+  s += '\\hline\n'
+  for h in head :
+    s += h + ' & '
+  s = s[:-3]+'\\\\\n'
+  s += '\\hline\n'
+  for row in table :
+    for data in row :
+      s += data + ' & '
+    s = s[:-3]+'\\\\\n'
+  s += '\\hline\n'
+  
+  s += '\\end{tabular}\n'
+  s += '\\caption{NAME\\_HERE}\n'
+  s += '\\end{figure}\n'
+  return s
 
 def left_pad(string, size, character=' ') :
   to_pad = size - len(string)
