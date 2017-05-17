@@ -82,8 +82,136 @@
 	\newpage
 	\section{Les décimales de pi}
 	
-	\subsection{Test de khi2}
-	Le premier test consiste à étudier le nombre d'apparitions de chaque décimale. Le résultat aléatoire attendu, c'est que l'ensemble des décimales apparaissent exactement le même nombre de fois.
+	\subsection{Test de $\chi^2$}
+	Le premier test consiste à étudier le nombre d'apparitions de chaque décimale. Si la séquence suit une loi uniforme, l'ensemble des décimales apparaissent exactement le même nombre de fois.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tabular}{|r|r|r|}
+			\hline
+			Décimales & Valeur attendue & Valeur observée\\
+			\hline
+			0 & 100000.0 & 99959\\
+			1 & 100000.0 & 99758\\
+			2 & 100000.0 & 100026\\
+			3 & 100000.0 & 100229\\
+			4 & 100000.0 & 100230\\
+			5 & 100000.0 & 100359\\
+			6 & 100000.0 & 99548\\
+			7 & 100000.0 & 99800\\
+			8 & 100000.0 & 99985\\
+			9 & 100000.0 & 100106\\
+			\hline
+		\end{tabular}
+		\caption{Tableau des décimales}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.25]{../chart_images/decimales_bar_chart.png}
+		\caption{Graphique des décimales}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tabular}{|r|r|r|r|}
+			\hline
+			$\alpha$ & Valeur & Limite & Résultat\\
+			\hline
+			0.001 & 5.509 & 27.877 & réussi\\
+			0.01 & 5.509 & 21.666 & réussi\\
+			0.05 & 5.509 & 16.919 & réussi\\
+			0.1 & 5.509 & 14.684 & réussi\\
+			\hline
+		\end{tabular}
+		\caption{Tableau du $\chi^2$}
+	\end{figure}
+	
+	Comme nous pouvons le voir dans le tableau, le test est réussi pour tous les $\alpha$ choisis.
+	
+	\newpage
+	\subsection{Test du poker}
+	Le test du poker consiste à prendre une suite de décimales (ici 5) et calculer le nombre de décimales différentes qui composent cette suite. Si la séquence suit une loi uniforme, la probabilité d'avoir r chiffres différents dans une séquence de longueur l est :
+	\[
+		\frac{
+			\left\{
+				\begin{array}{l}
+					l\\
+					r\\
+				\end{array}
+			\right\}
+			\prod_{i=10-r+1}^{10}i
+		}{10^l}
+	\]
+	
+	où $\left\{
+	\begin{array}{l}
+	l\\
+	r\\
+	\end{array}
+	\right\}$ est le nombre de Stirling.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tabular}{|r|r|r|}
+			\hline
+			Poker & Valeur attendue & Valeur observée\\
+			\hline
+			1 & 20 & 13\\
+			2 & 2700 & 2644\\
+			3 & 36000 & 36172\\
+			4 & 100800 & 100670\\
+			5 & 60480 & 60501\\
+			\hline
+		\end{tabular}
+		\caption{Tableau du Poker}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.25]{../chart_images/poker_bar_chart.png}
+		\caption{Graphique du Poker}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tabular}{|r|r|r|r|}
+			\hline
+			$\alpha$ & Valeur & Limite & Résultat\\
+			\hline
+			0.001 & 4.608 & 18.467 & réussi\\
+			0.01 & 4.608 & 13.277 & réussi\\
+			0.05 & 4.608 & 9.488 & réussi\\
+			0.1 & 4.608 & 7.779 & réussi\\
+			\hline
+		\end{tabular}
+		\caption{Tableau du $\chi^2$}
+	\end{figure}
+	
+	Comme nous pouvons le voir dans le tableau, le test est réussi pour tous les $\alpha$ choisis.
+	
+	\newpage
+	\subsection{Interprétation des tests}
+	D'après les tests effectués ci-dessus, les décimales de pi suivent une loi uniforme.
+	
+	\newpage
+	\section{Générateur de loi uniforme}
+	Notre générateur est très simple et suit ces étapes :
+	\begin{enumerate}
+		\item lecture des 15 premiers chiffres à l'emplacement actuel comme un nombre ;
+		\item division de ce nombre par $10^{15}$ afin d'obtenir un nombre dans l'intervalle [0, 1[.
+	\end{enumerate}
+	Quand nous arrivons à la fin du fichier, nous revenons au début pour que le générateur ne s'arrête jamais.
+	
+	Afin que le générateur ne commence pas toujours la séquence au même emplacement, nous choisissons l'emplacement de départ en fonction d'un timestamp. Ce timestamp représente le nombre de millisecondes écoulées depuis le 1er janvier 1970 UTC.
+	
+	\newpage
+	\section{Comparaison avec le générateur par défaut de Python}
+	Nous allons effectuer les tests vu au cours à la fois sur notre générateur et sur le générateur de python afin d'obtenir un indice de comparaison.
+	
+	\subsection{Test de $\chi^2$}
+	
+	Malgré sa simplicité, ce générateur donne de très bons résultats.
 	
 	\newpage
 	\section{Conclusion}
