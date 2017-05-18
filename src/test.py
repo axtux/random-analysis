@@ -59,7 +59,8 @@ def make_test(observed, expected, name='', x_name='', y_name='') :
   plotme.barchart((x, y), name, x_name, y_name)
 
 
-def display(dic, name='') :
+def display(dic, name='', digits=3) :
+  """pretty print dictionary dic with name and round float to digits digits after point"""
   head = sorted(dic.keys())
   if len(head) < 1 :
     return
@@ -74,7 +75,7 @@ def display(dic, name='') :
     for k in head :
       data = dic[k][i]
       if is_float(data) :
-        data = round(data, 3)
+        data = round(data, digits)
       row.append(str(data))
     
     # save it
