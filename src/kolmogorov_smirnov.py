@@ -1,6 +1,11 @@
 import random
 import pi_random
 import plotme
+from _is_ import is_int, is_float
+import math
+import test
+
+alphas = [0.001, 0.01, 0.05, 0.1]
 
 def uniform(x) :
   """uniform cumulative distribution function"""
@@ -18,7 +23,7 @@ def empirical(x, numbers) :
       acc = acc + 1
   return acc/len(numbers)
 
-def sample(generator, limit=10**6) :
+def sample(generator, limit) :
   """generate limit numbers and compare their distribution to uniform"""
   numbers = []
   for i in range(limit) :
@@ -50,18 +55,52 @@ def max_gap(data) :
       max = gap
   return max
 
-def test() :
-  pi_data = sample(pi_random)
-  py_data = sample(random)
+def make_test(n=10**3) :
+  name = 'Kolmogorov-Smirnov'
+  (x, y_pi) = sample(pi_random, n)
+  (x, y_py) = sample(random, n)
   
-  pi_dn = max_gap(pi_data)
-  py_dn = max_gap(py_data)
+  pi_dn = max_gap((x, y_pi))
+  py_dn = max_gap((x, y_py))
   
-  plotme.barchart(pi_data, 'Pi Kolmogorov-Smirnov')
-  plotme.barchart(py_data, 'Python Kolmogorov-Smirnov')
+  y = {
+    'Valeurs attendues' : y_pi['expected'],
+    'Valeurs de Pi' : y_pi['observed'],
+    'Valeurs de Python' : y_py['observed'],
+  }
+  data = (x, y)
+  plotme.barchart(data, name)
+  y['AX'] = x
+  test.display(y, name, 6)
   
-  print('Pi Dn is {}'.format(pi_dn))
-  print('Py Dn is {}'.format(py_dn))
+  result = {}
+  result['$\\alpha$'] = []
+  result['AValeur Pi'] = []
+  result['AValeur Python'] = []
+  result['Limite'] = []
+  result['Meilleur'] = []
+  
+  for alpha in sorted(alphas) :
+    result['$\\alpha$'].append(alpha)
+    result['AValeur Pi'].append(pi_dn)
+    result['AValeur Python'].append(py_dn)
+    result['Limite'].append(dn(alpha, n))
+    result['Meilleur'].append('Pi' if pi_dn < py_dn else 'Python')
+  
+  test.display(result, name, 6)
+  
+
+def dn(alpha, n) :
+  if not is_int(n) :
+    return print('n must be an integer')
+  if n < 50 :
+    return print('please use table for n < 50')
+  if not is_float(alpha) :
+    return print('alpha must be a float')
+  if alpha <= 0 or alpha >= 1 :
+    return print('alpha must be in ]0, 1[')
+  
+  return math.sqrt(-0.5*math.log(alpha/2))/math.sqrt(n)
 
 if __name__ == '__main__' :
-  test()
+  make_test(10**5)
