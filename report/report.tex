@@ -196,26 +196,120 @@
 	
 	\newpage
 	\section{Générateur de loi uniforme}
-	Notre générateur est très simple et suit ces étapes :
+	Notre générateur est très simple, il suit ces étapes :
 	\begin{enumerate}
 		\item lecture des 15 premiers chiffres à l'emplacement actuel comme un nombre ;
 		\item division de ce nombre par $10^{15}$ afin d'obtenir un nombre dans l'intervalle [0, 1[.
 	\end{enumerate}
 	Quand nous arrivons à la fin du fichier, nous revenons au début pour que le générateur ne s'arrête jamais.
 	
-	Afin que le générateur ne commence pas toujours la séquence au même emplacement, nous choisissons l'emplacement de départ en fonction d'un timestamp. Ce timestamp représente le nombre de millisecondes écoulées depuis le 1er janvier 1970 UTC.
+	Afin que le générateur ne commence pas toujours la séquence au même emplacement, nous choisissons l'emplacement de départ en fonction d'un timestamp.
+	Ce timestamp représente le nombre de millisecondes écoulées depuis le 1er janvier 1970 UTC.
 	
-	La période de ce générateur est de 200 000. En effet, si le premier nombre est extrait du début du fichier, après 66 667 ($\lceil\frac{1 000 000}{15}\rceil$) mouvements de 15 caractères, nous nous retrouvons à 5 caractères plus loin qu'initialement. Après 66 667 mouvements, nous nous retrouvons 10 caractères plus loin. Si après 66 667 mouvements, nous aurions été 15 cratères plus loin, après 66 666 mouvements, nous revenons au point initial. Nous avons donc lu 3*66 666 +2 nombres aléatoires avant de relire le premier.
+	La période de ce générateur est de 200 000.
+	En effet, si le premier nombre est extrait du début du fichier, après 66 667 ($\lceil\frac{1 000 000}{15}\rceil$) mouvements de 15 caractères, nous nous retrouvons à 5 caractères après le début du fichier.
+	Après 66 667 mouvements, nous nous retrouvons 10 caractères après le début du fichier.
+	Si après 66 667 mouvements, nous aurions été 15 après le début du fichier, après 66 666 mouvements, nous revenons au début du fichier.
+	Nous avons donc lu 3*66 666 +2 nombres aléatoires avant de relire le premier.
+	
+	En tant que bons programmeurs, nous avons paramétré le nombre de digits lus pour générer un nombre aléatoire.
+	Ainsi, le programmeur peut décider lui-même la balance entre une grande précision pour les nombres générés ou une grande période.
+	En effet, si moins de digits sont lus, la précision d'un nombre sera plus petite mais la période aura tendance à s'agrandir.
 	
 	\newpage
 	\section{Comparaison avec le générateur par défaut de Python}
-	Nous allons effectuer les tests vu au cours à la fois sur notre générateur et sur le générateur de python afin d'obtenir un indice de comparaison.
+	Nous allons maintenant comparer le caractère aléatoire de notre générateur avec celui utilisé par défaut dans Python (Mersenne Twister).
+	Nous n'allons pas réutiliser ni le test du $\chi^2$ ni le test du poker.
+	Bien qu'il existe des méthodes de correspondance, d'autres tests sont plus appropriés pour tester des fonctions continues.
+	Dans ces tests se trouve notamment le test de Kolmogorov-Smirnov.
 	
-	\subsection{Test de $\chi^2$}
+	\newpage
+	\subsection{Test de Kolmogorov-Smirnov}
+	
+	Pour effectuer ce test, nous générons 100 000 nombres avec notre générateur ainsi que 100 000 nombres avec le générateur de Python.
+	Ensuite, nous divisons l'intervalle [0, 1] en 100 valeurs réparties uniformément.
+	Pour chaque valeur, nous analysons la proportion de nombres de chaque générateur se trouvant en dessous de cette valeur.
+	Nous comparons la proportion de chaque générateur avec la proportion attendue d'une loi uniforme et nous en prenons le plus grand écart ($D_n$).
+	
+	À l'aide de la table de Kolmogorov-Smirnov, nous pouvons accepter ou refuser l'hypothèse disant que les générateurs suivent une loi uniforme.
+	
+	Nous pouvons également aller plus loin et comparer les $D_n$ obtenus pour chaque générateur
+	 Il est évident que le générateur ayant le plus petit $D_n$ sera celui se rapprochant d'avantage de la loi uniforme.
+	\begin{figure}[h]
+		\centering
+		\begin{tabular}{|r|r|r|r|}
+			\hline
+			X & Valeurs attendues & Valeurs de Pi & Valeurs de Python\\
+			\hline
+			0.01 & 0.01 & 0.01008 & 0.01019\\
+			0.02 & 0.02 & 0.02001 & 0.02041\\
+			0.03 & 0.03 & 0.03026 & 0.03055\\
+			0.04 & 0.04 & 0.03993 & 0.04118\\
+			0.05 & 0.05 & 0.04986 & 0.05164\\
+			0.06 & 0.06 & 0.05944 & 0.06145\\
+			0.07 & 0.07 & 0.06959 & 0.07172\\
+			0.08 & 0.08 & 0.0794 & 0.08185\\
+			0.09 & 0.09 & 0.08891 & 0.09194\\
+			0.1 & 0.1 & 0.09909 & 0.10154\\
+			... & ... & ... & ...\\
+			0.45 & 0.45 & 0.44995 & 0.45082\\
+			0.46 & 0.46 & 0.4601 & 0.46057\\
+			0.47 & 0.47 & 0.47026 & 0.47057\\
+			0.48 & 0.48 & 0.48063 & 0.48064\\
+			0.49 & 0.49 & 0.49032 & 0.49075\\
+			0.5 & 0.5 & 0.50059 & 0.50101\\
+			0.51 & 0.51 & 0.51073 & 0.51043\\
+			0.52 & 0.52 & 0.52031 & 0.52009\\
+			0.53 & 0.53 & 0.53065 & 0.53072\\
+			0.54 & 0.54 & 0.54064 & 0.54095\\
+			0.55 & 0.55 & 0.55076 & 0.55057\\
+			... & ... & ... & ...\\
+			0.9 & 0.9 & 0.8998 & 0.90023\\
+			0.91 & 0.91 & 0.90979 & 0.91049\\
+			0.92 & 0.92 & 0.91907 & 0.92049\\
+			0.93 & 0.93 & 0.92897 & 0.93025\\
+			0.94 & 0.94 & 0.93927 & 0.94029\\
+			0.95 & 0.95 & 0.94987 & 0.95097\\
+			0.96 & 0.96 & 0.95941 & 0.96029\\
+			0.97 & 0.97 & 0.96985 & 0.96935\\
+			0.98 & 0.98 & 0.9798 & 0.97962\\
+			0.99 & 0.99 & 0.98989 & 0.98957\\
+			\hline
+		\end{tabular}
+	\caption{Tableau de Kolmogorov-Smirnov}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.25]{../chart_images/kolmogorov-smirnov_bar_chart.png}
+		\caption{Graphique de Kolmogorov-Smirnov}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tabular}{|r|r|r|r|r|}
+			\hline
+			$\alpha$ & Valeur Pi & Valeur Python & Limite & Meilleur\\
+			\hline
+			0.001 & 0.00212 & 0.00194 & 0.006165 & Python\\
+			0.01 & 0.00212 & 0.00194 & 0.005147 & Python\\
+			0.05 & 0.00212 & 0.00194 & 0.004295 & Python\\
+			0.1 & 0.00212 & 0.00194 & 0.00387 & Python\\
+			\hline
+		\end{tabular}
+		\caption{Tableau des $D_\alpha$}
+	\end{figure}
+	
+	\newpage
+	Nous remarquons que le générateur de Python est meilleur dans ce test.
+	Cependant, si on répète ce test, il est possible d'obtenir des résultats différents.
+	En effet, tant que le nombre de nombres générés sera inférieur au plus petit commun multiple entre la période des deux générateurs, nous obtiendrons des nombres et donc des résultats différents.
 	
 	\newpage
 	\subsection{Interprétation des tests}
-	Malgré la simplicité de notre générateur, celui-ci donne de très bons résultats. Cela peut s'expliquer par le fait que nous n'avons effectué nos tests que sur les 1 000 000 premiers nombres aléatoires. En effet, la période de notre générateur est de 200 000 alors que la période du Mersenne Twister (utilisé par défaut dans python) est de $2^{19937}$.
+	Malgré la simplicité de notre générateur, celui-ci donne de très bons résultats.
+	Cela peut s'expliquer par le fait que nous n'avons effectué nos tests que sur un nombre limité de nombres générés. En 
+	ffet, la période de notre générateur est de 200 000 alors que la période du générateur de Python (Mersenne Twister) est de $2^{19937}$.
 	
 	D'après les tests effectués ci-dessus, ... % TODO
 	
