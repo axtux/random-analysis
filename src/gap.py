@@ -1,23 +1,22 @@
 gaps={}
 
-def mark(digits,a,b):
+def mark(numbers,a,b):
     rep = []
-    for e in digits :
-        value = float(e)/10
-        if a<=value and value<=b:
+    for n in numbers :
+        if a<=n and n<=b:
             rep.append(True)
-            #print (value,True)
+            #print (n,True)
         else :
             rep.append(False)
-            #print (value,False)
+            #print (n,False)
     return rep
 
-def realGaps(digits,r,a,b):
+def gaps(numbers,r,a,b):
 
-    marked = mark(digits,a,b)
+    marked = mark(numbers,a,b)
     rep = {}
 
-    for i in range(r+1):#initialise the list
+    for i in range(r+1):#initialise les gaps à 0
         rep[i]=0
 
     inGap = False
@@ -31,26 +30,32 @@ def realGaps(digits,r,a,b):
             gap=0
             inGap=False
     return rep
-    #on teste les gaps qui vont jusque 35
-
-def expected_gaps(digits,r,a,b):
+      
+def expected_gaps(obs,r,a,b):
     rep={}
-    p=(b-a)+0.1
-    n=len(digits)
+    p=(b-a)
+    totGap=0
+    for n in obs.values() :#numbers of gap total (proche de nombres*p)
+         totGap+=n
+    #print (totGap)
     for i in range(r+1):
         rep[i]= p*((1-p)**i)
-        rep[i]*=n*p
+        rep[i]*=totGap
     return rep
 
 if __name__ == "__main__" :
-  import pi
-  digits = pi.get_digits()
 
-  """test = realGaps([1,7,8,9,7,8],6,0,0.5)
-  for e in test.items():
-      print( e[0]," -- ",e[1])"""
+  import pi_random
 
-  observed = realGaps(digits,25,0,0.5)
-  expected = expected_gaps(digits,25,0,0.5)
+  #initialisation, il est conseiller de prendre a ou b qui vaut 0 ou 1
+  n = 1000000
+  a = 0
+  b = 1/2
+  #test sur notre générateur
+  generated = pi_random.generate(n)
+  observed = gaps(generated,25,a,b)#on limite les gaps à 35 car dépasse pas en général, bonne valeur
+  expected = expected_gaps(observed,25,a,b)
   import test
   test.make_test(observed, expected, 'Gap', 'Tailles de gap', 'Nombre d\'occurences')
+
+  #test sur le générateur de python
