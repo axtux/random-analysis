@@ -190,9 +190,79 @@
 	
 	Comme nous pouvons le voir dans le tableau, le test est réussi pour tous les $\alpha$ choisis.
 	
-	\newpage
-	\subsection{Interprétation des tests}
-	D'après les tests effectués ci-dessus, les décimales de pi suivent une loi uniforme.
+	
+	
+\newpage
+\subsection{Test de gap}
+	
+	
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+AGap & Valeur attendue & Valeur observée\\
+\hline
+0 & 360000.0 & 360268\\
+1 & 144000.0 & 144713\\
+2 & 57600.0 & 57490\\
+3 & 23040.0 & 22876\\
+4 & 9216.0 & 9039\\
+5 & 3686.4 & 3700\\
+6 & 1474.56 & 1499\\
+7 & 589.824 & 593\\
+8 & 235.93 & 224\\
+9 & 94.372 & 100\\
+10 & 37.749 & 38\\
+11 & 15.099 & 13\\
+12 & 6.04 & 4\\
+13 & 2.416 & 2\\
+14 & 0.966 & 2\\
+15 & 0.387 & 0\\
+16 & 0.155 & 0\\
+17 & 0.062 & 0\\
+18 & 0.025 & 0\\
+19 & 0.01 & 0\\
+20 & 0.004 & 0\\
+21 & 0.002 & 0\\
+22 & 0.001 & 0\\
+23 & 0.0 & 0\\
+24 & 0.0 & 0\\
+25 & 0.0 & 0\\
+\hline
+\end{tabular}
+\caption{Tableau de Gap}
+\end{figure}
+
+Nous constatons donc que les différentes valeurs observées sont proches des valeurs théoriques.
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{../chart_images/gap_bar_chart.png}
+\caption{Graphique de Gap}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|r|}
+\hline
+$\alpha$ & AValeur & Limite & Résultat\\
+\hline
+0.001 & 12.722 & 52.62 & réussi\\
+0.01 & 12.722 & 44.314 & réussi\\
+0.05 & 12.722 & 37.652 & réussi\\
+0.1 & 12.722 & 34.382 & réussi\\
+\hline
+\end{tabular}
+\caption{Tableau de $\chi^2$}
+\end{figure}
+
+
+
+\newpage
+\subsection{Interprétation des tests}
+D'après les tests effectués ci-dessus, les décimales de pi suivent une loi uniforme.
 	
 	\newpage
 	\section{Générateur de loi uniforme}
