@@ -24,7 +24,7 @@ def test(observed, expected) :
 
   results = {}
   for alpha in table :
-    limit = chi2.ppf(1-alpha,df)
+    limit = chi2.ppf(1-alpha,df)#we get the value in the chi2 table
     results[alpha] = (x, limit, x < limit)
 
   return results

@@ -16,7 +16,7 @@ def gaps(numbers,r,a,b):
     marked = mark(numbers,a,b)
     rep = {}
 
-    for i in range(r+1):#initialise les gaps à 0
+    for i in range(r+1):#initialize the gaps to 0
         rep[i]=0
     gap = 0
     for i in range(len(marked)):
@@ -31,7 +31,7 @@ def expected_gaps(obs,r,a,b):
     rep={}
     p=(b-a)
     totGap=0
-    for n in obs.values() :#numbers of gap total (proche de nombres*p)
+    for n in obs.values() :#numbers of total gap (near numbers*p)
          totGap+=n
     #print (totGap)
     for i in range(r+1):
@@ -43,22 +43,22 @@ if __name__ == "__main__" :
 
   import pi_random
   import random
-  #initialisation, il est conseiller de prendre a ou b qui vaut 0 ou 1
+  #initialization, you might take a or b equals to 0 or 1
   n = 1000000
   a = 0
   b = 1/2
-  #test sur notre générateur
+
+  #test on our generator
   print ("################################################")
   print ("Test sur Pi")
   print ("################################################")
   generated = pi_random.generate(n)
-  observed = gaps(generated,35,a,b)#on limite les gaps à 35 car dépasse pas en général, bonne valeur
+  observed = gaps(generated,35,a,b)
   expected = expected_gaps(observed,35,a,b)
   import test
   test.make_test(observed, expected, 'Gap', 'Tailles de gap', 'Nombre d\'occurences')
 
-  #test sur le générateur de python
-
+  #test on the python generator
   print ("################################################")
   print ("Test sur Python")
   print ("################################################")
@@ -67,7 +67,8 @@ if __name__ == "__main__" :
   for i in range(n):#init the generated numbers by python
       generated.append(random.random())
 
-  observed = gaps(generated,35,a,b)#on limite les gaps à 35 car dépasse pas en général, bonne valeur
+  #gaps length limited to 35 bacause it's a good value, it's generaly not overpassed
+  observed = gaps(generated,35,a,b)#we can change 35 to a higher value if we want
   expected = expected_gaps(observed,35,a,b)
   import test
   test.make_test(observed, expected, 'Gap', 'Tailles de gap', 'Nombre d\'occurences')
