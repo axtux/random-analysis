@@ -18,19 +18,15 @@ def gaps(numbers,r,a,b):
 
     for i in range(r+1):#initialise les gaps à 0
         rep[i]=0
-
-    inGap = False
     gap = 0
     for i in range(len(marked)):
         if (not marked[i]):
             gap +=1
-            inGap=True
         if (marked[i]):
             rep[gap]+=1
             gap=0
-            inGap=False
     return rep
-      
+
 def expected_gaps(obs,r,a,b):
     rep={}
     p=(b-a)
@@ -46,16 +42,32 @@ def expected_gaps(obs,r,a,b):
 if __name__ == "__main__" :
 
   import pi_random
-
+  import random
   #initialisation, il est conseiller de prendre a ou b qui vaut 0 ou 1
   n = 1000000
   a = 0
   b = 1/2
   #test sur notre générateur
+  print ("################################################")
+  print ("Test sur Pi")
+  print ("################################################")
   generated = pi_random.generate(n)
-  observed = gaps(generated,25,a,b)#on limite les gaps à 35 car dépasse pas en général, bonne valeur
-  expected = expected_gaps(observed,25,a,b)
+  observed = gaps(generated,35,a,b)#on limite les gaps à 35 car dépasse pas en général, bonne valeur
+  expected = expected_gaps(observed,35,a,b)
   import test
   test.make_test(observed, expected, 'Gap', 'Tailles de gap', 'Nombre d\'occurences')
 
   #test sur le générateur de python
+
+  print ("################################################")
+  print ("Test sur Python")
+  print ("################################################")
+
+  generated=[]
+  for i in range(n):#init the generated numbers by python
+      generated.append(random.random())
+
+  observed = gaps(generated,35,a,b)#on limite les gaps à 35 car dépasse pas en général, bonne valeur
+  expected = expected_gaps(observed,35,a,b)
+  import test
+  test.make_test(observed, expected, 'Gap', 'Tailles de gap', 'Nombre d\'occurences')
