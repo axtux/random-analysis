@@ -6,7 +6,7 @@ from _is_ import is_int
 def init():
   """DO :
   - get pi digits and calculate len
-  - set default path to 13
+  - set default path to 17
   - add randomness to start point with ms time
   """
   global digits, l, i
@@ -17,8 +17,8 @@ def init():
     exit('Need digits from pi module')
   l = len(digits)
 
-  # set default path to 13
-  set_path(13)
+  # set default path to 17
+  set_path(17)
 
   # add randomness to start point with ms time
   i = int(time.time()*1000) % l

@@ -6,6 +6,7 @@ import scipy
 
 def stirling(k, r) :
     """number of manner to make r groups with k choices - not recursive version"""
+
     return (1/math.factorial(r))*sum((-1)**(r-i)*scipy.special.binom(r, i)*i**k for i in range(r+1))
 
 def count(digits,r,d=10):
@@ -32,7 +33,6 @@ def count(digits,r,d=10):
             i+=1
             p+=1
         else :
-            #print (i)
             if (i in rep):
                 rep[i]+=1
             elements=list(all_digits)
@@ -57,8 +57,9 @@ def expected_coupons(obs,d=10):
 if __name__ == "__main__" :
 
     print ("################################################")
-    print ("Test sur décimales de Pi")
+    print ("Test sur les décimales de Pi")
     print ("################################################")
+
     digits = pi.get_digits()#str of digits
     observed = count(digits,101)#good value to have a good test
     expected = expected_coupons(observed)

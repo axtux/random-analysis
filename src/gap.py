@@ -35,13 +35,14 @@ def expected_gaps(obs,r,a,b):
     rep={}
     p=(b-a)
     totGap=0
-    for n in obs.values() :#numbers of total gap (near numbers*p)
+    for n in obs.values() : #numbers of total gap (near numbers*p)
          totGap+=n
-    #print (totGap)
+
     for i in range(r):
         rep[i]= p*((1-p)**i)
         rep[i]*=totGap
-    rep[r]= p*((1-p)**(i+1))*totGap
+    rep[r]= p*((1-p)**(i+1))*totGap #last value
+
     return rep
 
 if __name__ == "__main__" :
@@ -57,8 +58,8 @@ if __name__ == "__main__" :
   print ("Test sur Pi")
   print ("################################################")
   generated = pi_random.generate(n)
-  observed = gaps(generated,30,a,b)
-  expected = expected_gaps(observed,30,a,b)
+  observed = gaps(generated,21,a,b)
+  expected = expected_gaps(observed,21,a,b)
 
   test.make_test(observed, expected, 'Gap', 'Tailles de gap', 'Nombre d\'occurences')
 
@@ -72,7 +73,7 @@ if __name__ == "__main__" :
       generated.append(random.random())
 
   #gaps length limited to 30 bacause it's a good value, it's generaly not overpassed
-  observed = gaps(generated,30,a,b)#we can change 35 to a higher value if we want
-  expected = expected_gaps(observed,30,a,b)
-  
+  observed = gaps(generated,21,a,b)#we can change 35 to a higher value if we want
+  expected = expected_gaps(observed,21,a,b)
+
   test.make_test(observed, expected, 'Gap', 'Tailles de gap', 'Nombre d\'occurences')
