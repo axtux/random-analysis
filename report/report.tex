@@ -131,6 +131,7 @@
 	
 	\newpage
 	\subsection{Test du poker}
+	
 	Le test du poker consiste à prendre une suite de décimales (ici 5) et calculer le nombre de décimales différentes qui composent cette suite. Si la séquence suit une loi uniforme, la probabilité d'avoir r chiffres différents dans une séquence de longueur l est :
 	\[
 		\frac{
@@ -188,76 +189,8 @@
 		\caption{Tableau du $\chi^2$}
 	\end{figure}
 	
-	Comme nous pouvons le voir dans le tableau, le test est réussi pour tous les $\alpha$ choisis.
-	
-	
-	
-\newpage
-\subsection{Test de gap}
-	
-	
-\begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|}
-\hline
-AGap & Valeur attendue & Valeur observée\\
-\hline
-0 & 360000.0 & 360268\\
-1 & 144000.0 & 144713\\
-2 & 57600.0 & 57490\\
-3 & 23040.0 & 22876\\
-4 & 9216.0 & 9039\\
-5 & 3686.4 & 3700\\
-6 & 1474.56 & 1499\\
-7 & 589.824 & 593\\
-8 & 235.93 & 224\\
-9 & 94.372 & 100\\
-10 & 37.749 & 38\\
-11 & 15.099 & 13\\
-12 & 6.04 & 4\\
-13 & 2.416 & 2\\
-14 & 0.966 & 2\\
-15 & 0.387 & 0\\
-16 & 0.155 & 0\\
-17 & 0.062 & 0\\
-18 & 0.025 & 0\\
-19 & 0.01 & 0\\
-20 & 0.004 & 0\\
-21 & 0.002 & 0\\
-22 & 0.001 & 0\\
-23 & 0.0 & 0\\
-24 & 0.0 & 0\\
-25 & 0.0 & 0\\
-\hline
-\end{tabular}
-\caption{Tableau de Gap}
-\end{figure}
-
-Nous constatons donc que les différentes valeurs observées sont proches des valeurs théoriques.
-
-\newpage
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.3]{../chart_images/gap_bar_chart.png}
-\caption{Graphique de Gap}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|r|}
-\hline
-$\alpha$ & AValeur & Limite & Résultat\\
-\hline
-0.001 & 12.722 & 52.62 & réussi\\
-0.01 & 12.722 & 44.314 & réussi\\
-0.05 & 12.722 & 37.652 & réussi\\
-0.1 & 12.722 & 34.382 & réussi\\
-\hline
-\end{tabular}
-\caption{Tableau de $\chi^2$}
-\end{figure}
-
+	Comme nous pouvons le voir dans le tableau, le test est réussi pour tous les $\alpha$ choisis.	
+		
 
 
 \newpage
@@ -375,11 +308,357 @@ D'après les tests effectués ci-dessus, les décimales de pi suivent une loi un
 	Cependant, si on répète ce test, il est possible d'obtenir des résultats différents.
 	En effet, tant que le nombre de nombres générés sera inférieur au plus petit commun multiple entre la période des deux générateurs, nous obtiendrons des nombres et donc des résultats différents.
 	
+	
+\newpage
+\subsection{Test de gap}
+	
+Le test de gap est un test vérifiant si les valeurs générés pseudo-aléatoirement sont réparties uniformément entre 0 et 1. Ce test se fait en différentes étapes:
+\begin{itemize}
+\item Nous générons n nombres à travers nos générateurs de nombres aléatoires.
+\item Nous choisissons un intervalle $[a,b]\in[0,1]$ (nous avons ici choisis a=0 et b =1/2 pour un temps de calcul optimal).
+\item Nous marquons les nombres se trouvant dans cet intervalle
+\item Nous calculons les distances entre chaque nombres marqués (nous notons $r_i$ les différentes distances. 
+\end{itemize} 
+
+Nous obtenons ainsi les différentes occurrences $r_i$ que nous appelons les gaps (trous en anglais), et pouvons les comparer à l'aide d'un $\chi^2$ avec les valeurs théoriques attendues :
+
+\[
+	r_i = N. (p.(1-p)^i)
+\] 
+
+
+où N est le nombres total de gaps observés
+
+p est la probabilité d'être dans l'intervalle qui vaut b-a
+
+
+Nous avons donc effectuer ce test sur notre générateur pseudo-aléatoire et le générateur de python.
+
+	\subsubsection{Notre générateur sur Pi}
+
+Ci-dessous nous avons illustrer les occurrences pour les différents gaps obtenus dans un tableau et à l'aide d'un graphique. 
+Pour tout les $r_i $ plus grands que 21, les résultats sont proches ou égal à 0, ils ne sont donc pas significatifs et il n'est pas important de les mettre dans le tableau.
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+$r_i $ & Valeur attendue & Valeur observée\\
+\hline
+0 & 250101.0 & 250067\\
+1 & 125050.5 & 125248\\
+2 & 62525.25 & 62273\\
+3 & 31262.625 & 31471\\
+4 & 15631.312 & 15616\\
+5 & 7815.656 & 7860\\
+6 & 3907.828 & 3826\\
+7 & 1953.914 & 1898\\
+8 & 976.957 & 954\\
+9 & 488.479 & 471\\
+10 & 244.239 & 252\\
+11 & 122.12 & 135\\
+12 & 61.06 & 66\\
+13 & 30.53 & 30\\
+14 & 15.265 & 19\\
+15 & 7.632 & 7\\
+16 & 3.816 & 4\\
+17 & 1.908 & 1\\
+18 & 0.954 & 2\\
+19 & 0.477 & 1\\
+20 & 0.239 & 1\\
+21 & 0.119 & 0\\
+\hline
+\end{tabular}
+\caption{Tableau de Gap}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{../chart_images/gap_bar_chart.png}
+\caption{Graphique de Gap}
+\end{figure}
+\newpage
+
+Ci-dessous nous avons notre test de $\chi^2$ :
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|r|}
+\hline
+$\alpha$ & AValeur & Limite & Résultat\\
+\hline
+0.001 & 15.16 & 46.7970380416 & réussi\\
+0.01 & 15.16 & 38.9321726835 & réussi\\
+0.05 & 15.16 & 32.6705733409 & réussi\\
+0.1 & 15.16 & 29.6150894362 & réussi\\
+\hline
+\end{tabular}
+\caption{Tableau de $\chi^2$}
+\end{figure}
+
+
+Nous constatons donc que les différentes valeurs observées sont proches des valeurs théoriques. Et que le test de $\chi^2$ réussit bien. Notre générateur est donc bien répartit uniformément selon ce test.
+
+\newpage
+
+	\subsubsection{Le générateur de python}
+En ce qui concerne ce générateur, nous avons procédé de la même façon que ci-dessus pour notre générateur sur Pi. Nous avons aussi, pour les mêmes raisons que nous avons cité précédemment, éviter d'afficher les valeurs supérieur à 21.
+
+Notre tableau correspondant se trouve à la figure 13, le graphique associé à la figure 14, et notre test de $\chi^2$ se trouve à la figure 15.
+	
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+$r_i$ & Valeur attendue & Valeur observée\\
+\hline
+0 & 249770.5 & 249636\\
+1 & 124885.25 & 124785\\
+2 & 62442.625 & 62609\\
+3 & 31221.312 & 31076\\
+4 & 15610.656 & 15690\\
+5 & 7805.328 & 7790\\
+6 & 3902.664 & 3987\\
+7 & 1951.332 & 2030\\
+8 & 975.666 & 982\\
+9 & 487.833 & 478\\
+10 & 243.917 & 229\\
+11 & 121.958 & 135\\
+12 & 60.979 & 73\\
+13 & 30.49 & 17\\
+14 & 15.245 & 10\\
+15 & 7.622 & 9\\
+16 & 3.811 & 5\\
+17 & 1.906 & 0\\
+18 & 0.953 & 0\\
+19 & 0.476 & 0\\
+20 & 0.238 & 0\\
+21 & 0.119 & 0\\
+\hline
+\end{tabular}
+\caption{Tableau de Gap}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.20]{../chart_images/gap_bar_chart.png}
+\caption{Graphique de Gap}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|r|}
+\hline
+$\alpha$ & AValeur & Limite & Résultat\\
+\hline
+0.001 & 17.766 & 46.7970380416 & réussi\\
+0.01 & 17.766 & 38.9321726835 & réussi\\
+0.05 & 17.766 & 32.6705733409 & réussi\\
+0.1 & 17.766 & 29.6150894362 & réussi\\
+\hline
+\end{tabular}
+\caption{Tableau de $\chi^2$}
+\end{figure}
+
+
+\newpage
+
+Nous observons donc que nos valeurs sont elles aussi proches des valeurs théoriques. Et que notre test de $\chi^2$  est réussit. Le générateur de python est donc bien répartit uniformément lui aussi.
+
+\newpage
+	
+\subsection{Le collectionneur de coupons}
+Le collectionneur de coupons est un test permettant de vérifier si nos différentes décimales de Pi suivent une loi uniforme.
+ 
+Le fonctionnement de ce test que nous avons adapté à notre problème se déroule comme ceci:  
+\begin{itemize}
+\item Nous parcourons les différentes décimales de Pi dans l'ordre, en calculant le nombres de digits visités.
+\item Lorsque nous avons rencontrés tous les différents digits (de 0 à 9) dans une séquence donnée de taille r, nous gardons la valeur r en mémoire.
+\item Nous recommençons ensuite le procédé avec les décimales qui suivent 
+\end{itemize}
+
+Nous obtenons ainsi les différentes occurrences de séquences de tailles $r_i$ contenant tout les différents digits.
+
+Nous comparons ensuite cette valeur à la valeur théorique suivant une loi uniforme, et ceci à l'aide d'un $\chi^2$.
+
+Nous calculons la valeur théorique à l'aide de la probabilité $ S_r$ ci-dessous. Celle-ci représente la probabilité de rencontrer r digits avant d'avoir rencontré tout les différents digits possibles. r est donc la longueur de la séquence contenants les digits.
+\begin{flushleft}
+
+
+\includegraphics[scale=0.4]{images/formule.png}  
+
+\textbf{où} d est le nombre de différents digits possibles (il vaut 10 dans notre cas)
+
+\textbf{Remarque :} $S_r$ sera égal à 0 lorsque r<d, donc lorsque r<10.
+
+\end{flushleft}
+
+ 
+
+Ceci s'explique par le fait qu'il est impossible de rencontrer tout les différents digits, puisque la séquence est plus petite que le nombre des digits (qui vaut ici 10). 
+
+Nous obtenons donc le tableau de valeurs suivant pour les différentes longueurs de séquences , ainsi que le graphique correspondant, et le tableau représentant nos tests de $\chi^2$. .
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+ACollectionneur de coupons & Valeur attendue & Valeur observée\\
+\hline
+0 & 0 & 0\\
+1 & 0 & 0\\
+2 & 0 & 0\\
+3 & 0 & 0\\
+4 & 0 & 0\\
+5 & 0 & 0\\
+6 & 0 & 0\\
+7 & 0 & 0\\
+8 & 0 & 0\\
+9 & 0 & 0\\
+10 & 12.39307776 & 12\\
+11 & 55.76884992 & 62\\
+12 & 143.140048128 & 154\\
+13 & 276.055807104 & 265\\
+14 & 445.533624088 & 496\\
+15 & 636.400653977 & 645\\
+16 & 831.928596481 & 869\\
+17 & 1017.20430344 & 1008\\
+18 & 1180.91435762 & 1150\\
+19 & 1315.83993579 & 1341\\
+20 & 1418.52980752 & 1354\\
+21 & 1488.56759813 & 1482\\
+22 & 1527.7253865 & 1576\\
+23 & 1539.17477958 & 1515\\
+24 & 1526.83570793 & 1543\\
+25 & 1494.88494323 & 1456\\
+26 & 1447.4141361 & 1470\\
+27 & 1388.21268496 & 1345\\
+28 & 1320.64693213 & 1317\\
+29 & 1247.60902054 & 1224\\
+30 & 1171.51303642 & 1145\\
+31 & 1094.32096408 & 1105\\
+32 & 1017.58554788 & 1018\\
+33 & 942.500994353 & 968\\
+34 & 869.955465262 & 883\\
+35 & 800.58156873 & 817\\
+36 & 734.802673351 & 772\\
+37 & 672.873984191 & 680\\
+38 & 614.918053757 & 640\\
+39 & 560.954859475 & 522\\
+40 & 510.926844132 & 506\\
+41 & 464.719449185 & 456\\
+42 & 422.177718467 & 406\\
+43 & 383.119543979 & 379\\
+44 & 347.346088582 & 351\\
+45 & 314.649867464 & 324\\
+46 & 284.820911145 & 280\\
+47 & 257.651373497 & 266\\
+48 & 232.938892283 & 219\\
+49 & 210.488959104 & 212\\
+\hline
+\end{tabular}
+\caption{Tableau de Collectionneur de coupons 1}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+r & Valeur attendue & Valeur observée\\
+\hline
+50 & 190.116510903 & 185\\
+51 & 171.646916633 & 197\\
+52 & 154.916499868 & 142\\
+53 & 139.772710642 & 148\\
+54 & 126.074036915 & 115\\
+55 & 113.689727286 & 113\\
+56 & 102.499381192 & 87\\
+57 & 92.3924503812 & 95\\
+58 & 83.2676854074 & 77\\
+59 & 75.0325528813 & 80\\
+60 & 67.6026427858 & 69\\
+61 & 60.9010801317 & 66\\
+62 & 54.8579512498 & 62\\
+63 & 49.4097519134 & 59\\
+64 & 44.4988620923 & 44\\
+65 & 40.0730502972 & 39\\
+66 & 36.0850090818 & 34\\
+67 & 32.4919222233 & 32\\
+68 & 29.2550633396 & 22\\
+69 & 26.3394251458 & 22\\
+70 & 23.7133781718 & 27\\
+71 & 21.3483575072 & 25\\
+72 & 19.2185759825 & 27\\
+73 & 17.3007621179 & 17\\
+74 & 15.57392114 & 8\\
+75 & 14.019117386 & 12\\
+76 & 12.6192764564 & 12\\
+77 & 11.3590055427 & 5\\
+78 & 10.2244304333 & 13\\
+79 & 9.20304778734 & 9\\
+80 & 8.28359135557 & 12\\
+81 & 7.45591091794 & 8\\
+82 & 6.71086279872 & 7\\
+83 & 6.04021090687 & 8\\
+84 & 5.43653733358 & 4\\
+85 & 4.89316161903 & 4\\
+86 & 4.40406787558 & 5\\
+87 & 3.96383902519 & 6\\
+88 & 3.56759747407 & 3\\
+89 & 3.21095160896 & 1\\
+90 & 2.88994755473 & 0\\
+91 & 2.60102568515 & 1\\
+92 & 2.34098142576 & 4\\
+93 & 2.10692993077 & 4\\
+94 & 1.89627425595 & 0\\
+95 & 1.7066766851 & 1\\
+96 & 1.53603290049 & 1\\
+97 & 1.38244871762 & 4\\
+98 & 1.24421913165 & 0\\
+99 & 1.11980944715 & 2\\
+100 & 1.0078382854 & 0\\
+101 & 0.907062283239 & 1\\
+\hline
+\end{tabular}
+\caption{Tableau de Collectionneur de coupons 2}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{../chart_images/collectionneur_de_coupons_bar_chart.png}
+\caption{Graphique de Collectionneur de coupons}
+\end{figure}
+ 
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|r|}
+\hline
+$\alpha$ & AValeur & Limite & Résultat\\
+\hline
+0.001 & 79.837 & 150.667055668 & réussi\\
+0.01 & 79.837 & 136.971003847 & réussi\\
+0.05 & 79.837 & 125.458419408 & réussi\\
+0.1 & 79.837 & 119.588667243 & réussi\\
+\hline
+\end{tabular}
+\caption{Tableau de $\chi^2$}
+\end{figure}
+
+Nous remarquons que les valeurs du tableau sont proches des valeurs théoriques. Ainsi que notre graphique suit la forme d'une gaussienne. 
+
+Ce test confirme donc que les décimales de Pi suivent bien une loi uniforme, car les différents tests de $\chi^2$ sont respectés.  	
 	\newpage
 	\subsection{Interprétation des tests}
 	Malgré la simplicité de notre générateur, celui-ci donne de très bons résultats.
-	Cela peut s'expliquer par le fait que nous n'avons effectué nos tests que sur un nombre limité de nombres générés. En 
-	ffet, la période de notre générateur est de 200 000 alors que la période du générateur de Python (Mersenne Twister) est de $2^{19937}$.
+	Cela peut s'expliquer par le fait que nous n'avons effectué nos tests que sur un nombre limité de nombres générés. 
+	En effet, la période de notre générateur est de 200 000 alors que la période du générateur de Python (Mersenne Twister) est de $2^{19937}$.
 	
 	D'après les tests effectués ci-dessus, ... % TODO
 	
