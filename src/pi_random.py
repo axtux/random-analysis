@@ -2,6 +2,7 @@ import pi
 import time
 from _is_ import is_int
 
+DEFAULT_PATH = 17
 
 def init():
   """DO :
@@ -18,7 +19,7 @@ def init():
   l = len(digits)
 
   # set default path
-  set_path(17)
+  set_path(DEFAULT_PATH)
 
   # add randomness to start point with ms time
   i = int(time.time()*1000) % l
@@ -53,6 +54,12 @@ def generate(number):
     for i in range(number):
         rep.append(random())
     return rep
+
+def period() :
+  i = 1
+  while (i*l)%path != 0 :
+    i += 1
+  return i*l/path
 
 init()
 if __name__ == "__main__" :
