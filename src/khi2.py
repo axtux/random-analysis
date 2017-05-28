@@ -1,5 +1,5 @@
 from scipy.stats import chi2
-table = [0.1,0.05,0.01,0.001]
+alpha_values = [0.1, 0.05, 0.01, 0.001]
 
 def test(observed, expected) :
   ol = len(observed)
@@ -23,8 +23,9 @@ def test(observed, expected) :
   x = round(x, 3)
 
   results = {}
-  for alpha in table :
-    limit = chi2.ppf(1-alpha,df)#we get the value in the chi2 table
+  for alpha in alpha_values :
+    # get value from scipy table
+    limit = float(chi2.ppf(1-alpha, df))
     results[alpha] = (x, limit, x < limit)
 
   return results
