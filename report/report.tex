@@ -21,44 +21,42 @@
 	\cfoot{\thepage}
 	
 	\begin{titlepage}
-		\begin{sffamily}
-			\begin{center}
-				% Upper part of the page. The '~' is needed because \\
-				% only works if a paragraph has started.
-				\includegraphics[scale=1.5]{images/pi.png}~\\[1.5cm]
-				
-				% Title
-				\HRule \\[0.5cm]
-				{ \huge \bfseries Pi randomness\\[0.4cm] }
-				\HRule \\[1.5cm]
-				
-				\Large{Rapport de projet de simulation}\\[2cm]
-				
-				\Large{Année académique 2016-2017}\\[2cm]
-				
-				% Author and supervisor
-				\begin{minipage}{0.4\textwidth}
-					\begin{flushleft} \large
-						\emph{\textbf{Auteurs :}}\\
-						SALEMI Marco\\
-						LECOCQ Alexis
-					\end{flushleft}
-				\end{minipage}
-				\begin{minipage}{0.4\textwidth}
-					\begin{flushright} \large
-						\emph{\textbf{Directeurs :}}\\
-						BUYS Alain\\
-						-\\
-					\end{flushright}
-				\end{minipage}
-				
-				\vfill
-				
-				% Bottom of the page
-				{\large \today}
-				
-			\end{center}
-		\end{sffamily}
+		\begin{center}
+			% Upper part of the page. The '~' is needed because \\
+			% only works if a paragraph has started.
+			\includegraphics[scale=1.5]{images/pi.png}~\\[1.5cm]
+			
+			% Title
+			\HRule \\[0.5cm]
+			{ \huge \bfseries Pi randomness\\[0.4cm] }
+			\HRule \\[1.5cm]
+			
+			\Large{Rapport de projet de simulation}\\[2cm]
+			
+			\Large{Année académique 2016-2017}\\[2cm]
+			
+			% Author and supervisor
+			\begin{minipage}{0.4\textwidth}
+				\begin{flushleft} \large
+					\emph{\textbf{Auteurs :}}\\
+					SALEMI Marco\\
+					LECOCQ Alexis
+				\end{flushleft}
+			\end{minipage}
+			\begin{minipage}{0.4\textwidth}
+				\begin{flushright} \large
+					\emph{\textbf{Directeurs :}}\\
+					BUYS Alain\\
+					-\\
+				\end{flushright}
+			\end{minipage}
+			
+			\vfill
+			
+			% Bottom of the page
+			{\large \today}
+			
+		\end{center}
 	\end{titlepage}
 	
 	\newpage
@@ -210,7 +208,6 @@ Nous obtenons ainsi les différentes occurrences de séquences de tailles $r_i$ 
 Nous comparons ensuite cette valeur à la valeur théorique suivant une loi uniforme, et ceci à l'aide d'un $\chi^2$.
 
 Nous calculons la valeur théorique à l'aide de la probabilité $ S_r$ ci-dessous. Celle-ci représente la probabilité de rencontrer r digits avant d'avoir rencontré tout les différents digits possibles. r est donc la longueur de la séquence contenants les digits.
-\begin{flushleft}
 
 \begin{figure}[h]
 		\centering
@@ -221,8 +218,6 @@ Nous calculons la valeur théorique à l'aide de la probabilité $ S_r$ ci-desso
 \textbf{où} d est le nombre de différents digits possibles (il vaut 10 dans notre cas)
 
 \textbf{Remarque :} $S_r$ sera égal à 0 lorsque r<d, donc lorsque r<10.
-
-\end{flushleft}
 
  
 
@@ -236,18 +231,9 @@ Nous obtenons donc le tableau de valeurs suivant pour les différentes longueurs
 		\centering
 \begin{tabular}{|r|r|r|}
 \hline
-ACollectionneur de coupons & Valeur attendue & Valeur observée\\
+Collectionneur de coupons & Valeur attendue & Valeur observée\\
 \hline
-0 & 0 & 0\\
-1 & 0 & 0\\
-2 & 0 & 0\\
-3 & 0 & 0\\
-4 & 0 & 0\\
-5 & 0 & 0\\
-6 & 0 & 0\\
-7 & 0 & 0\\
-8 & 0 & 0\\
-9 & 0 & 0\\
+0-9 & 0 & 0\\
 10 & 12.39307776 & 12\\
 11 & 55.76884992 & 62\\
 12 & 143.140048128 & 154\\
@@ -259,88 +245,19 @@ ACollectionneur de coupons & Valeur attendue & Valeur observée\\
 18 & 1180.91435762 & 1150\\
 19 & 1315.83993579 & 1341\\
 20 & 1418.52980752 & 1354\\
-21 & 1488.56759813 & 1482\\
-22 & 1527.7253865 & 1576\\
-23 & 1539.17477958 & 1515\\
-24 & 1526.83570793 & 1543\\
-25 & 1494.88494323 & 1456\\
-26 & 1447.4141361 & 1470\\
-27 & 1388.21268496 & 1345\\
-28 & 1320.64693213 & 1317\\
-29 & 1247.60902054 & 1224\\
-30 & 1171.51303642 & 1145\\
-31 & 1094.32096408 & 1105\\
-32 & 1017.58554788 & 1018\\
-33 & 942.500994353 & 968\\
-34 & 869.955465262 & 883\\
-35 & 800.58156873 & 817\\
-36 & 734.802673351 & 772\\
-37 & 672.873984191 & 680\\
-38 & 614.918053757 & 640\\
-39 & 560.954859475 & 522\\
-40 & 510.926844132 & 506\\
-41 & 464.719449185 & 456\\
-42 & 422.177718467 & 406\\
-43 & 383.119543979 & 379\\
-44 & 347.346088582 & 351\\
+... & ... & ...\\
 45 & 314.649867464 & 324\\
 46 & 284.820911145 & 280\\
 47 & 257.651373497 & 266\\
 48 & 232.938892283 & 219\\
 49 & 210.488959104 & 212\\
-\hline
-\end{tabular}
-\caption{Tableau du Collectionneur De Coupons 1}
-	\end{figure}
-
-\newpage
-
-\begin{figure}[h]
-		\centering
-\begin{tabular}{|r|r|r|}
-\hline
-r & Valeur attendue & Valeur observée\\
-\hline
 50 & 190.116510903 & 185\\
 51 & 171.646916633 & 197\\
 52 & 154.916499868 & 142\\
 53 & 139.772710642 & 148\\
 54 & 126.074036915 & 115\\
 55 & 113.689727286 & 113\\
-56 & 102.499381192 & 87\\
-57 & 92.3924503812 & 95\\
-58 & 83.2676854074 & 77\\
-59 & 75.0325528813 & 80\\
-60 & 67.6026427858 & 69\\
-61 & 60.9010801317 & 66\\
-62 & 54.8579512498 & 62\\
-63 & 49.4097519134 & 59\\
-64 & 44.4988620923 & 44\\
-65 & 40.0730502972 & 39\\
-66 & 36.0850090818 & 34\\
-67 & 32.4919222233 & 32\\
-68 & 29.2550633396 & 22\\
-69 & 26.3394251458 & 22\\
-70 & 23.7133781718 & 27\\
-71 & 21.3483575072 & 25\\
-72 & 19.2185759825 & 27\\
-73 & 17.3007621179 & 17\\
-74 & 15.57392114 & 8\\
-75 & 14.019117386 & 12\\
-76 & 12.6192764564 & 12\\
-77 & 11.3590055427 & 5\\
-78 & 10.2244304333 & 13\\
-79 & 9.20304778734 & 9\\
-80 & 8.28359135557 & 12\\
-81 & 7.45591091794 & 8\\
-82 & 6.71086279872 & 7\\
-83 & 6.04021090687 & 8\\
-84 & 5.43653733358 & 4\\
-85 & 4.89316161903 & 4\\
-86 & 4.40406787558 & 5\\
-87 & 3.96383902519 & 6\\
-88 & 3.56759747407 & 3\\
-89 & 3.21095160896 & 1\\
+... & ... & ...\\
 90 & 2.88994755473 & 0\\
 91 & 2.60102568515 & 1\\
 92 & 2.34098142576 & 4\\
@@ -565,7 +482,7 @@ $r_i $ & Valeur attendue & Valeur observée\\
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.25]{../chart_images/gap_bar_chart.png}
+\includegraphics[scale=0.25]{../chart_images/pi_gap_bar_chart.png}
 \caption{Graphique de Gap}
 \end{figure}
 \newpage
@@ -632,7 +549,7 @@ $r_i$ & Valeur attendue & Valeur observée\\
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.20]{../chart_images/gap_bar_chart.png}
+\includegraphics[scale=0.20]{../chart_images/pi_gap_bar_chart.png}
 \caption{Graphique de Gap}
 \end{figure}
 
@@ -673,18 +590,9 @@ Nous obtenons donc le tableau de valeurs, le graphique associé et les test de $
 \centering
 \begin{tabular}{|r|r|r|}
 \hline
-ACollectionneur de coupons & Valeur attendue & Valeur observée\\
+Collectionneur de coupons & Valeur attendue & Valeur observée\\
 \hline
-0 & 0 & 0\\
-1 & 0 & 0\\
-2 & 0 & 0\\
-3 & 0 & 0\\
-4 & 0 & 0\\
-5 & 0 & 0\\
-6 & 0 & 0\\
-7 & 0 & 0\\
-8 & 0 & 0\\
-9 & 0 & 0\\
+0-9 & 0 & 0\\
 10 & 12.40614144 & 7\\
 11 & 55.82763648 & 59\\
 12 & 143.290933632 & 151\\
@@ -696,88 +604,20 @@ ACollectionneur de coupons & Valeur attendue & Valeur observée\\
 18 & 1182.15917248 & 1166\\
 19 & 1317.22697718 & 1336\\
 20 & 1420.02509544 & 1436\\
-21 & 1490.13671366 & 1488\\
-22 & 1529.33577869 & 1507\\
-23 & 1540.79724069 & 1554\\
-24 & 1528.4451623 & 1511\\
-25 & 1496.46071795 & 1504\\
-26 & 1448.93987131 & 1462\\
-27 & 1389.67601527 & 1381\\
-28 & 1322.03904063 & 1412\\
-29 & 1248.92413898 & 1197\\
-30 & 1172.74794123 & 1217\\
-31 & 1095.47449988 & 1080\\
-32 & 1018.65819604 & 1047\\
-33 & 943.49449505 & 944\\
-34 & 870.872494916 & 855\\
-35 & 801.425470595 & 808\\
-36 & 735.577236956 & 706\\
-37 & 673.583268082 & 683\\
-38 & 615.566245662 & 629\\
-39 & 561.546168181 & 561\\
-40 & 511.465417755 & 497\\
-41 & 465.209315084 & 485\\
-42 & 422.622740658 & 405\\
-43 & 383.523394517 & 361\\
-44 & 347.712229927 & 349\\
+... & ... & ...\\
 45 & 314.98154336 & 300\\
 46 & 285.12114401 & 307\\
 47 & 257.922966653 & 258\\
 48 & 233.18443574 & 219\\
 49 & 210.710837838 & 198\\
 50 & 190.316914815 & 194\\
-\hline
-\end{tabular}
-\caption{Tableau de Collectionneur de coupons 1}
-\end{figure}
-
-
-
-\begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|}
-\hline
-ACollectionneur de coupons & Valeur attendue & Valeur observée\\
-\hline
 51 & 171.827851541 & 157\\
 52 & 155.07979906 & 163\\
 53 & 139.920046598 & 127\\
 54 & 126.206932948 & 127\\
 55 & 113.809568882 & 121\\
-56 & 102.607426921 & 109\\
-57 & 92.4898422825 & 93\\
-58 & 83.3554587932 & 88\\
-59 & 75.1116455232 & 81\\
-60 & 67.6739034774 & 76\\
-61 & 60.9652766322 & 52\\
-62 & 54.9157776215 & 53\\
-63 & 49.461835278 & 59\\
-64 & 44.5457688338 & 36\\
-65 & 40.1152917417 & 36\\
-66 & 36.123046688 & 31\\
-67 & 32.526172317 & 40\\
-68 & 29.2859014246 & 21\\
-69 & 26.3671898244 & 20\\
-70 & 23.7383747054 & 21\\
-71 & 21.3708610464 & 23\\
-72 & 19.2388344955 & 21\\
-73 & 17.3189990421 & 11\\
-74 & 15.5903377821 & 26\\
-75 & 14.0338950923 & 8\\
-76 & 12.6325785749 & 13\\
-77 & 11.3709791958 & 15\\
-78 & 10.2352081182 & 12\\
-79 & 9.21274882155 & 8\\
-80 & 8.29232318062 & 4\\
-81 & 7.4637702759 & 9\\
-82 & 6.71793679323 & 8\\
-83 & 6.04657795983 & 7\\
-84 & 5.44226804757 & 2\\
-85 & 4.89831955468 & 5\\
-86 & 4.40871025212 & 5\\
-87 & 3.96801735164 & 4\\
-88 & 3.57135811793 & 4\\
-89 & 3.21433630848 & 1\\
+... & ... & ...\\
+... & ... & ...\\
 90 & 2.89299388033 & 3\\
 91 & 2.60376745503 & 2\\
 92 & 2.34344908011 & 3\\
