@@ -336,6 +336,7 @@ D'après les tests effectués ci-dessus, les décimales de pi suivent une loi un
 	
 	\newpage
 	\subsection{Test de Kolmogorov-Smirnov}
+	Le test de Kolmogorov-Smirnov est un test vérifiant si les valeurs générés pseudo-aléatoirement sont réparties uniformément entre 0 et 1.
 	
 	Pour effectuer ce test, nous générons 100 000 nombres avec notre générateur ainsi que 100 000 nombres avec le générateur de Python.
 	Ensuite, nous divisons l'intervalle [0, 1] en 100 valeurs réparties uniformément.
@@ -418,9 +419,10 @@ D'après les tests effectués ci-dessus, les décimales de pi suivent une loi un
 	
 	
 \newpage
-\subsection{Test de gap}
-	
-Le test de gap est un test vérifiant si les valeurs générés pseudo-aléatoirement sont réparties uniformément entre 0 et 1. Ce test se fait en différentes étapes:
+\subsection{Test du gap}
+Le test du gap est un test vérifiant la grandeur des trous (gap en anglais) séparant des nombres faisant partie d'un même intervalle.
+
+Ce test se fait en différentes étapes:
 \begin{itemize}
 \item Nous générons n nombres à travers nos générateurs de nombres aléatoires.
 \item Nous choisissons un intervalle $[a,b]\in[0,1]$ (nous avons ici choisis a=0 et b =1/2 pour un temps de calcul optimal).
@@ -431,53 +433,51 @@ Le test de gap est un test vérifiant si les valeurs générés pseudo-aléatoir
 Nous obtenons ainsi les différentes occurrences $r_i$ que nous appelons les gaps (trous en anglais), et pouvons les comparer à l'aide d'un $\chi^2$ avec les valeurs théoriques attendues :
 
 \[
-	r_i = N. (p.(1-p)^i)
+	r_i = N p (1-p)^i
 \] 
-
+\[
+	r_{>i} = N (1-p)^{i+1}
+\]
 
 où N est le nombres total de gaps observés
 
-p est la probabilité d'être dans l'intervalle qui vaut b-a
+p est la probabilité d'être dans l'intervalle $|b-a|$
 
 
 Nous avons donc effectuer ce test sur notre générateur pseudo-aléatoire et le générateur de python.
 
-	\subsubsection{Notre générateur sur Pi}
+	\subsubsection{Notre générateur}
 
 Ci-dessous nous avons illustrer les occurrences pour les différents gaps obtenus dans un tableau et à l'aide d'un graphique. 
-Pour tout les $r_i $ plus grands que 21, les résultats sont proches ou égal à 0, ils ne sont donc pas significatifs et il n'est pas important de les mettre dans le tableau.
+Nous avons fixé la limite à 15 afin d'éviter les classes vides, ces dernières étant néfastes au test de $\chi^2$.
 
 \begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|}
-\hline
-$r_i $ & Valeur attendue & Valeur observée\\
-\hline
-0 & 250101.0 & 250067\\
-1 & 125050.5 & 125248\\
-2 & 62525.25 & 62273\\
-3 & 31262.625 & 31471\\
-4 & 15631.312 & 15616\\
-5 & 7815.656 & 7860\\
-6 & 3907.828 & 3826\\
-7 & 1953.914 & 1898\\
-8 & 976.957 & 954\\
-9 & 488.479 & 471\\
-10 & 244.239 & 252\\
-11 & 122.12 & 135\\
-12 & 61.06 & 66\\
-13 & 30.53 & 30\\
-14 & 15.265 & 19\\
-15 & 7.632 & 7\\
-16 & 3.816 & 4\\
-17 & 1.908 & 1\\
-18 & 0.954 & 2\\
-19 & 0.477 & 1\\
-20 & 0.239 & 1\\
-21 & 0.119 & 0\\
-\hline
-\end{tabular}
-\caption{Tableau de Gap}
+	\centering
+	\begin{tabular}{|r|r|r|}
+		\hline
+		APi Gap & Valeur attendue & Valeur observée\\
+		\hline
+		0 & 250101.000 & 250067\\
+		1 & 125050.500 & 125248\\
+		2 & 62525.250 & 62273\\
+		3 & 31262.625 & 31471\\
+		4 & 15631.312 & 15616\\
+		5 & 7815.656 & 7860\\
+		6 & 3907.828 & 3826\\
+		7 & 1953.914 & 1898\\
+		8 & 976.957 & 954\\
+		9 & 488.479 & 471\\
+		10 & 244.239 & 252\\
+		11 & 122.120 & 135\\
+		12 & 61.060 & 66\\
+		13 & 30.530 & 30\\
+		14 & 15.265 & 19\\
+		> 15 & 15.265 & 16\\
+		\hline
+		Total & 500202 & 500202\\
+		\hline
+	\end{tabular}
+	\caption{Tableau de Pi Gap}
 \end{figure}
 
 \begin{figure}[h]
@@ -487,92 +487,84 @@ $r_i $ & Valeur attendue & Valeur observée\\
 \end{figure}
 \newpage
 
-Ci-dessous nous avons notre test de $\chi^2$ :
-
+Résultats du test de $\chi^2$ :
 \begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|r|}
-\hline
-$\alpha$ & AValeur & Limite & Résultat\\
-\hline
-0.001 & 15.16 & 46.7970380416 & réussi\\
-0.01 & 15.16 & 38.9321726835 & réussi\\
-0.05 & 15.16 & 32.6705733409 & réussi\\
-0.1 & 15.16 & 29.6150894362 & réussi\\
-\hline
-\end{tabular}
-\caption{Tableau de $\chi^2$}
+	\centering
+	\begin{tabular}{|r|r|r|r|}
+		\hline
+		$\alpha$ & AValeur & Limite & Résultat\\
+		\hline
+		0.001 & 10.431 & 37.697 & réussi\\
+		0.010 & 10.431 & 30.578 & réussi\\
+		0.050 & 10.431 & 24.996 & réussi\\
+		0.100 & 10.431 & 22.307 & réussi\\
+		\hline
+	\end{tabular}
+	\caption{Tableau de $\chi^2$}
 \end{figure}
 
 
-Nous constatons donc que les différentes valeurs observées sont proches des valeurs théoriques. Et que le test de $\chi^2$ réussit bien. Notre générateur est donc bien répartit uniformément selon ce test.
+Nous constatons donc que les différentes valeurs observées sont proches des valeurs théoriques. Et que le test de $\chi^2$ réussit bien. Notre générateur passe donc ce test avec succès.
 
 \newpage
 
 	\subsubsection{Le générateur de python}
-En ce qui concerne ce générateur, nous avons procédé de la même façon que ci-dessus pour notre générateur sur Pi. Nous avons aussi, pour les mêmes raisons que nous avons cité précédemment, éviter d'afficher les valeurs supérieur à 21.
-
-Notre tableau correspondant se trouve à la figure 13, le graphique associé à la figure 14, et notre test de $\chi^2$ se trouve à la figure 15.
+En ce qui concerne ce générateur, nous avons procédé de la même façon que ci-dessus pour notre générateur.
 	
 \begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|}
-\hline
-$r_i$ & Valeur attendue & Valeur observée\\
-\hline
-0 & 249770.5 & 249636\\
-1 & 124885.25 & 124785\\
-2 & 62442.625 & 62609\\
-3 & 31221.312 & 31076\\
-4 & 15610.656 & 15690\\
-5 & 7805.328 & 7790\\
-6 & 3902.664 & 3987\\
-7 & 1951.332 & 2030\\
-8 & 975.666 & 982\\
-9 & 487.833 & 478\\
-10 & 243.917 & 229\\
-11 & 121.958 & 135\\
-12 & 60.979 & 73\\
-13 & 30.49 & 17\\
-14 & 15.245 & 10\\
-15 & 7.622 & 9\\
-16 & 3.811 & 5\\
-17 & 1.906 & 0\\
-18 & 0.953 & 0\\
-19 & 0.476 & 0\\
-20 & 0.238 & 0\\
-21 & 0.119 & 0\\
-\hline
-\end{tabular}
-\caption{Tableau de Gap}
+	\centering
+	\begin{tabular}{|r|r|r|}
+		\hline
+		APython Gap & Valeur attendue & Valeur observée\\
+		\hline
+		0 & 249672.000 & 249152\\
+		1 & 124836.000 & 125037\\
+		2 & 62418.000 & 62606\\
+		3 & 31209.000 & 31237\\
+		4 & 15604.500 & 15686\\
+		5 & 7802.250 & 7839\\
+		6 & 3901.125 & 3834\\
+		7 & 1950.562 & 1969\\
+		8 & 975.281 & 942\\
+		9 & 487.641 & 522\\
+		10 & 243.820 & 254\\
+		11 & 121.910 & 122\\
+		12 & 60.955 & 78\\
+		13 & 30.478 & 31\\
+		14 & 15.239 & 19\\
+		> 15 & 15.239 & 16\\
+		\hline
+		Total & 499344 & 499344\\
+		\hline
+	\end{tabular}
+	\caption{Tableau de Python Gap}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.20]{../chart_images/pi_gap_bar_chart.png}
+\includegraphics[scale=0.20]{../chart_images/python_gap_bar_chart.png}
 \caption{Graphique de Gap}
 \end{figure}
 
-
 \begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|r|}
-\hline
-$\alpha$ & AValeur & Limite & Résultat\\
-\hline
-0.001 & 17.766 & 46.7970380416 & réussi\\
-0.01 & 17.766 & 38.9321726835 & réussi\\
-0.05 & 17.766 & 32.6705733409 & réussi\\
-0.1 & 17.766 & 29.6150894362 & réussi\\
-\hline
-\end{tabular}
-\caption{Tableau de $\chi^2$}
+	\centering
+	\begin{tabular}{|r|r|r|r|}
+		\hline
+		$\alpha$ & AValeur & Limite & Résultat\\
+		\hline
+		0.001 & 13.649 & 37.697 & réussi\\
+		0.010 & 13.649 & 30.578 & réussi\\
+		0.050 & 13.649 & 24.996 & réussi\\
+		0.100 & 13.649 & 22.307 & réussi\\
+		\hline
+	\end{tabular}
+	\caption{Tableau de $\chi^2$}
 \end{figure}
 
 
 \newpage
 
-Nous observons donc que nos valeurs sont elles aussi proches des valeurs théoriques. Et que notre test de $\chi^2$  est réussit. Le générateur de python est donc bien répartit uniformément lui aussi.
+Nous observons, ici aussi, que les valeurs sont proches des valeurs théoriques et que le test de $\chi^2$  est réussi.
 
 \newpage
 
