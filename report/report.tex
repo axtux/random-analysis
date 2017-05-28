@@ -77,41 +77,63 @@
 	
 	Le projet doit être réalisé en python et nous avons opté pour la version 3.
 
-	Nous avons utilisé 2 librairies externes afin d'afficher nos graphiques et accéder à la table de $chi_2$. Ces librairies sont \textbf{scipy} et \textbf{plotme}. Elles doivent donc être télécharger afin de compiler notre projet. %TODO mettre les liens ? 
+	Nous avons utilisé deux librairies externes :
+	\begin{itemize}
+		\item \textbf{scipy} : pour l'accès à la table des valeurs de Kolmogorov-Smirnov ;
+		\item \textbf{plotly} : pour réaliser les graphiques.
+	\end{itemize}
+	
+	L'installation de ces libraires est très simple à l'aide du gestionnaire de paquets pip3 :
+	
+	\begin{center}
+		\begin{tabular}{|l|}
+			\hline \\
+			\$ pip3 install scipy plotly\\
+			\\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	Sur certains systèmes, les droits administrateurs sont requis pour installer ces librairies.
 	
 	\newpage
-	\section{Les décimales de pi}
+	\section{Les décimales de $\pi$}
 	
 	\subsection{Test de $\chi^2$}
 	Le premier test consiste à étudier le nombre d'apparitions de chaque décimale. Si la séquence suit une loi uniforme, l'ensemble des décimales apparaissent exactement le même nombre de fois.
 	
+	
+	Résultats du test :
 	\begin{figure}[h]
 		\centering
 		\begin{tabular}{|r|r|r|}
 			\hline
 			Décimales & Valeur attendue & Valeur observée\\
 			\hline
-			0 & 100000.0 & 99959\\
-			1 & 100000.0 & 99758\\
-			2 & 100000.0 & 100026\\
-			3 & 100000.0 & 100229\\
-			4 & 100000.0 & 100230\\
-			5 & 100000.0 & 100359\\
-			6 & 100000.0 & 99548\\
-			7 & 100000.0 & 99800\\
-			8 & 100000.0 & 99985\\
-			9 & 100000.0 & 100106\\
+			0 & 100000 & 99959\\
+			1 & 100000 & 99758\\
+			2 & 100000 & 100026\\
+			3 & 100000 & 100229\\
+			4 & 100000 & 100230\\
+			5 & 100000 & 100359\\
+			6 & 100000 & 99548\\
+			7 & 100000 & 99800\\
+			8 & 100000 & 99985\\
+			9 & 100000 & 100106\\
 			\hline
 		\end{tabular}
 		\caption{Tableau des décimales}
 	\end{figure}
 	
+	Graphique :
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.25]{../chart_images/decimales_bar_chart.png}
 		\caption{Graphique des décimales}
 	\end{figure}
 	
+	\newpage
+	Test de $\chi^2$ :
 	\begin{figure}[h]
 		\centering
 		\begin{tabular}{|r|r|r|r|}
@@ -152,6 +174,7 @@
 	\end{array}
 	\right\}$ est le nombre de Stirling.
 	
+	Résultats du test :
 	\begin{figure}[h]
 		\centering
 		\begin{tabular}{|r|r|r|}
@@ -168,12 +191,15 @@
 		\caption{Tableau du Poker}
 	\end{figure}
 	
+	Graphique :
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.25]{../chart_images/poker_bar_chart.png}
 		\caption{Graphique du Poker}
 	\end{figure}
 	
+	\newpage
+	Test de $\chi^2$ :
 	\begin{figure}[h]
 		\centering
 		\begin{tabular}{|r|r|r|r|}
@@ -193,7 +219,7 @@
 		
 \newpage
 	
-\subsection{Le collectionneur de coupons}
+\subsection{Test du collectionneur de coupons}
 Le collectionneur de coupons est un test permettant de vérifier si nos différentes décimales de Pi suivent une loi uniforme.
  
 Le fonctionnement de ce test que nous avons adapté à notre problème se déroule comme ceci:  
@@ -302,30 +328,41 @@ Nous remarquons que les valeurs du tableau sont proches des valeurs théoriques.
 Ce test confirme donc que les décimales de Pi suivent bien une loi uniforme, car les différents tests de $\chi^2$ sont respectés.
 
 \newpage
-\subsection{Interprétation des tests}
+\subsection{Interprétation des résultats}
 D'après les tests effectués ci-dessus, les décimales de pi suivent une loi uniforme.
 	
 	\newpage
-	\section{Générateur de loi uniforme}
+	\section{Générateur de loi uniforme à partir des décimales de $\pi$}
 	Notre générateur est très simple, il suit ces étapes :
 	\begin{enumerate}
-		\item lecture des 15 premiers chiffres à l'emplacement actuel comme un nombre ;
-		\item division de ce nombre par $10^{15}$ afin d'obtenir un nombre dans l'intervalle [0, 1[.
+		\item lecture des $n$ premiers chiffres à l'emplacement actuel comme un nombre ;
+		\item division de ce nombre par $10^{n}$ afin d'obtenir un nombre dans l'intervalle $[0, 1[$.
 	\end{enumerate}
-	Quand nous arrivons à la fin du fichier, nous revenons au début pour que le générateur ne s'arrête jamais.
+	Les caractères éventuellement manquants à la fin du fichiers sont lus en début de fichier. Ainsi, le générateur ne s'arrête jamais.
 	
 	Afin que le générateur ne commence pas toujours la séquence au même emplacement, nous choisissons l'emplacement de départ en fonction d'un timestamp.
 	Ce timestamp représente le nombre de millisecondes écoulées depuis le 1er janvier 1970 UTC.
 	
-	La période de ce générateur est de 200 000.
-	En effet, si le premier nombre est extrait du début du fichier, après 66 667 ($\lceil\frac{1 000 000}{15}\rceil$) mouvements de 15 caractères, nous nous retrouvons à 5 caractères après le début du fichier.
-	Après 66 667 mouvements, nous nous retrouvons 10 caractères après le début du fichier.
-	Si après 66 667 mouvements, nous aurions été 15 après le début du fichier, après 66 666 mouvements, nous revenons au début du fichier.
-	Nous avons donc lu 3*66 666 +2 nombres aléatoires avant de relire le premier.
+	Notre générateur possédant un paramètre $n$, sa période est variable.
 	
-	En tant que bons programmeurs, nous avons paramétré le nombre de digits lus pour générer un nombre aléatoire.
-	Ainsi, le programmeur peut décider lui-même la balance entre une grande précision pour les nombres générés ou une grande période.
-	En effet, si moins de digits sont lus, la précision d'un nombre sera plus petite mais la période aura tendance à s'agrandir.
+	\subsection{Choix du paramètre}
+	Paramétrer notre générateur soulève une question : quel paramètre utiliser par défaut et pourquoi ?
+	
+	Choisir un paramètre trop petit réduirait la précision du générateur.
+	Par exemple si un seul digit est lu, alors il est évident que notre générateur ne générera que 10 nombres différents.
+	Afin d'obtenir la meilleure précision possible, nous nous sommes fixé un minimum de 15 digits.
+	Cela correspond à la précision utilisée par Python pour représenter u nombre flottant.
+	Augmenter $n$ au-delà de 15 n'améliorerait donc pas la précision.
+	
+	Par ailleurs, choisir un paramètre qui divise 1000000 réduirait la période.
+	Par exemple, si nous choisissons un paramètre de 100, alors il est évident qu'après 10000 générations, nous nous retrouverions au début du fichier.
+	Cela réduirait la période à 10000.
+	En fait, il convient d'utiliser un nombre qui est premier par rapport à 1000000 pour obtenir la période maximale de 1000000.
+	
+	Notre premier choix s'est donc porté sur le nombre $n = 17$, qui est le premier nombre premier après 15.
+	Nous avons également réalisé différents tests pratiques et ce choix du paramètre s'est avéré le plus judicieux.
+	Afin de ne pas perturber le lecteur, nous n'avons pas inclus les tests des autres paramètres dans ce rapport.
+	Cependant, ces derniers sont facilement réalisables à l'aide du code fourni en annexe.
 	
 	\newpage
 	\section{Comparaison avec le générateur par défaut de Python}
@@ -336,7 +373,7 @@ D'après les tests effectués ci-dessus, les décimales de pi suivent une loi un
 	
 	\newpage
 	\subsection{Test de Kolmogorov-Smirnov}
-	Le test de Kolmogorov-Smirnov est un test vérifiant si les valeurs générés pseudo-aléatoirement sont réparties uniformément entre 0 et 1.
+	Le test de Kolmogorov-Smirnov est un test vérifiant si les valeurs générées pseudo-aléatoirement sont réparties uniformément entre 0 et 1.
 	
 	Pour effectuer ce test, nous générons 100 000 nombres avec notre générateur ainsi que 100 000 nombres avec le générateur de Python.
 	Ensuite, nous divisons l'intervalle [0, 1] en 100 valeurs réparties uniformément.
