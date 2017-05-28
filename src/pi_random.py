@@ -48,12 +48,8 @@ def random() :
 
   return int(s) * mult
 
-def generate(number):
-    init()
-    rep=[]
-    for i in range(number):
-        rep.append(random())
-    return rep
+def generate(number) :
+  return [random() for i in range(number)]
 
 def period() :
   i = 1
