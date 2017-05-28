@@ -62,6 +62,8 @@ def make_test(observed, expected, name='', x_name='', y_name='') :
 
 def display(dic, name='', digits=3) :
   """pretty print dictionary dic with name and round float to digits digits after point"""
+  float_format = '{:.'+str(digits)+'f}'
+  
   head = sorted(dic.keys())
   if len(head) < 1 :
     return
@@ -75,9 +77,13 @@ def display(dic, name='', digits=3) :
     row = []
     for k in head :
       data = dic[k][i]
+      
       if is_float(data) :
-        data = round(data, digits)
-      row.append(str(data))
+        data = float_format.format(data)
+      else :
+        data = str(data)
+      
+      row.append(data)
 
     # save it
     table.append(row)
