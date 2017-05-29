@@ -6,9 +6,9 @@ DEFAULT_PATH = 17
 
 def init():
   """DO :
-  - get pi digits and calculate len
+  - get pi digits and compute len
   - set default path
-  - add randomness to start point with ms time
+  - add randomness to start point from ms timestamp
   """
   global digits, l, i
 
@@ -59,6 +59,5 @@ def period() :
 
 init()
 if __name__ == "__main__" :
-  num = generate(20)
-  for i in num :
+  for i in generate(20) :
       print (i)

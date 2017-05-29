@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from pprint import pprint
-import khi2
+import chi2
 import plotme
 from _is_ import is_float
 
@@ -41,7 +41,7 @@ def make_test(observed, expected, name='', x_name='', y_name='') :
   display(disp, name)
 
 
-  k = khi2.test(y['Valeur observée'], y['Valeur attendue'])
+  k = chi2.test(y['Valeur observée'], y['Valeur attendue'])
   result = {}
   result['$\\alpha$'] = []
   result['AValeur'] = []
