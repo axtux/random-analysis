@@ -36,6 +36,8 @@ def count(digits,r,d=10):
         else :
             if (i in rep):
                 rep[i]+=1
+            else :
+                rep[len(rep)-1]+=1    
             elements=list(all_digits)
             i=0
     return rep
@@ -45,14 +47,18 @@ def expected_coupons(obs,d=10):
 
     rep = {}
     totr=0
+    t = len(obs)
     for e in obs.values():#we compute the total of different sequence
         totr+=e
 
-    for r in range(len(obs)):#have all the differents r sequence
+    for r in range(t-1):#have all the differents r sequence
         if (r<d):
             rep[r]=0
         else :
             rep[r]=stirling(r-1,d-1)*(math.factorial(d)/(d**r))*totr
+
+    rep[t]= 1 - (stirling(t-1,d)*(math.factorial(d)/(d**(t-1))))
+    rep[t]*=totr
     return rep
 
 def gen_python(size=1000000):# because there is one million decimal in pi file
