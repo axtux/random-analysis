@@ -7,6 +7,7 @@
 
 \usepackage{fancyhdr}
 \usepackage{vmargin}
+\usepackage{amsmath}
 
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
@@ -77,41 +78,63 @@
 	
 	Le projet doit être réalisé en python et nous avons opté pour la version 3.
 
-	Nous avons utilisé 2 librairies externes afin d'afficher nos graphiques et accéder à la table de $chi_2$. Ces librairies sont \textbf{scipy} et \textbf{plotme}. Elles doivent donc être télécharger afin de compiler notre projet. %TODO mettre les liens ? 
+	Nous avons utilisé deux librairies externes :
+	\begin{itemize}
+		\item \textbf{scipy} : pour l'accès à la table des valeurs de Kolmogorov-Smirnov ;
+		\item \textbf{plotly} : pour réaliser les graphiques.
+	\end{itemize}
+	
+	L'installation de ces libraires est très simple à l'aide du gestionnaire de paquets pip3 :
+	
+	\begin{center}
+		\begin{tabular}{|l|}
+			\hline \\
+			\$ pip3 install scipy plotly\\
+			\\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	Sur certains systèmes, les droits administrateurs sont requis pour installer ces librairies.
 	
 	\newpage
-	\section{Les décimales de pi}
+	\section{Les décimales de $\pi$}
 	
 	\subsection{Test de $\chi^2$}
 	Le premier test consiste à étudier le nombre d'apparitions de chaque décimale. Si la séquence suit une loi uniforme, l'ensemble des décimales apparaissent exactement le même nombre de fois.
 	
+	
+	Résultats du test :
 	\begin{figure}[h]
 		\centering
 		\begin{tabular}{|r|r|r|}
 			\hline
 			Décimales & Valeur attendue & Valeur observée\\
 			\hline
-			0 & 100000.0 & 99959\\
-			1 & 100000.0 & 99758\\
-			2 & 100000.0 & 100026\\
-			3 & 100000.0 & 100229\\
-			4 & 100000.0 & 100230\\
-			5 & 100000.0 & 100359\\
-			6 & 100000.0 & 99548\\
-			7 & 100000.0 & 99800\\
-			8 & 100000.0 & 99985\\
-			9 & 100000.0 & 100106\\
+			0 & 100000 & 99959\\
+			1 & 100000 & 99758\\
+			2 & 100000 & 100026\\
+			3 & 100000 & 100229\\
+			4 & 100000 & 100230\\
+			5 & 100000 & 100359\\
+			6 & 100000 & 99548\\
+			7 & 100000 & 99800\\
+			8 & 100000 & 99985\\
+			9 & 100000 & 100106\\
 			\hline
 		\end{tabular}
 		\caption{Tableau des décimales}
 	\end{figure}
 	
+	Graphique :
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.25]{../chart_images/decimales_bar_chart.png}
 		\caption{Graphique des décimales}
 	\end{figure}
 	
+	\newpage
+	Test de $\chi^2$ :
 	\begin{figure}[h]
 		\centering
 		\begin{tabular}{|r|r|r|r|}
@@ -132,7 +155,9 @@
 	\newpage
 	\subsection{Test du poker}
 	
-	Le test du poker consiste à prendre une suite de décimales (ici 5) et calculer le nombre de décimales différentes qui composent cette suite. Si la séquence suit une loi uniforme, la probabilité d'avoir r chiffres différents dans une séquence de longueur l est :
+	Le test du poker consiste à considérer une suite de décimales comme une suite de paquets de $l$ décimales. Dans chaque paquet, on compte le nombre de décimales différentes qui le composent. On regroupe ensuite les paquets par le nombre de décimales différentes qui les composent.
+	
+	Dans le cas où la séquence de décimales suivrait une loi uniforme, la probabilité d'avoir r décimales différentes dans une séquence de longueur l est de :
 	\[
 		\frac{
 			\left\{
@@ -152,11 +177,14 @@
 	\end{array}
 	\right\}$ est le nombre de Stirling.
 	
+	 Pour obtenir la valeur théorique, on multiple la probabilité par le nombre total de paquets. On a opté dans ce test pour des paquets de 5 décimales.
+	
+	Résultats du test :
 	\begin{figure}[h]
 		\centering
 		\begin{tabular}{|r|r|r|}
 			\hline
-			Poker & Valeur attendue & Valeur observée\\
+			\# Décimales $\ne$ & Valeur attendue & Valeur observée\\
 			\hline
 			1 & 20 & 13\\
 			2 & 2700 & 2644\\
@@ -168,12 +196,15 @@
 		\caption{Tableau du Poker}
 	\end{figure}
 	
+	\newpage
+	Graphique :
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.25]{../chart_images/poker_bar_chart.png}
 		\caption{Graphique du Poker}
 	\end{figure}
 	
+	Test de $\chi^2$ :
 	\begin{figure}[h]
 		\centering
 		\begin{tabular}{|r|r|r|r|}
@@ -189,11 +220,11 @@
 		\caption{Tableau du $\chi^2$}
 	\end{figure}
 	
-	Comme nous pouvons le voir dans le tableau, le test est réussi pour tous les $\alpha$ choisis.	
+	Comme nous pouvons le voir dans le tableau, le test est réussi pour tous les $\alpha$ choisis.
 		
 \newpage
 	
-\subsection{Le collectionneur de coupons}
+\subsection{Test du collectionneur de coupons}
 Le collectionneur de coupons est un test permettant de vérifier si nos différentes décimales de Pi suivent une loi uniforme.
  
 Le fonctionnement de ce test que nous avons adapté à notre problème se déroule comme ceci:  
@@ -302,30 +333,41 @@ Nous remarquons que les valeurs du tableau sont proches des valeurs théoriques.
 Ce test confirme donc que les décimales de Pi suivent bien une loi uniforme, car les différents tests de $\chi^2$ sont respectés.
 
 \newpage
-\subsection{Interprétation des tests}
+\subsection{Interprétation des résultats}
 D'après les tests effectués ci-dessus, les décimales de pi suivent une loi uniforme.
 	
 	\newpage
-	\section{Générateur de loi uniforme}
+	\section{Générateur de loi uniforme à partir des décimales de $\pi$}
 	Notre générateur est très simple, il suit ces étapes :
 	\begin{enumerate}
-		\item lecture des 15 premiers chiffres à l'emplacement actuel comme un nombre ;
-		\item division de ce nombre par $10^{15}$ afin d'obtenir un nombre dans l'intervalle [0, 1[.
+		\item lecture des $n$ premiers chiffres à l'emplacement actuel comme un nombre ;
+		\item division de ce nombre par $10^{n}$ afin d'obtenir un nombre dans l'intervalle $[0, 1[$.
 	\end{enumerate}
-	Quand nous arrivons à la fin du fichier, nous revenons au début pour que le générateur ne s'arrête jamais.
+	Les caractères éventuellement manquants à la fin du fichiers sont lus en début de fichier. Ainsi, le générateur ne s'arrête jamais.
 	
 	Afin que le générateur ne commence pas toujours la séquence au même emplacement, nous choisissons l'emplacement de départ en fonction d'un timestamp.
 	Ce timestamp représente le nombre de millisecondes écoulées depuis le 1er janvier 1970 UTC.
 	
-	La période de ce générateur est de 200 000.
-	En effet, si le premier nombre est extrait du début du fichier, après 66 667 ($\lceil\frac{1 000 000}{15}\rceil$) mouvements de 15 caractères, nous nous retrouvons à 5 caractères après le début du fichier.
-	Après 66 667 mouvements, nous nous retrouvons 10 caractères après le début du fichier.
-	Si après 66 667 mouvements, nous aurions été 15 après le début du fichier, après 66 666 mouvements, nous revenons au début du fichier.
-	Nous avons donc lu 3*66 666 +2 nombres aléatoires avant de relire le premier.
+	Notre générateur possédant un paramètre $n$, sa période est variable.
 	
-	En tant que bons programmeurs, nous avons paramétré le nombre de digits lus pour générer un nombre aléatoire.
-	Ainsi, le programmeur peut décider lui-même la balance entre une grande précision pour les nombres générés ou une grande période.
-	En effet, si moins de digits sont lus, la précision d'un nombre sera plus petite mais la période aura tendance à s'agrandir.
+	\subsection{Choix du paramètre}
+	Paramétrer notre générateur soulève une question : quel paramètre utiliser par défaut et pourquoi ?
+	
+	Choisir un paramètre trop petit réduirait la précision du générateur.
+	Par exemple si un seul digit est lu, alors il est évident que notre générateur ne générera que 10 nombres différents.
+	Afin d'obtenir la meilleure précision possible, nous nous sommes fixé un minimum de 15 digits.
+	Cela correspond à la précision utilisée par Python pour représenter u nombre flottant.
+	Augmenter $n$ au-delà de 15 n'améliorerait donc pas la précision.
+	
+	Par ailleurs, choisir un paramètre qui divise 1000000 réduirait la période.
+	Par exemple, si nous choisissons un paramètre de 100, alors il est évident qu'après 10000 générations, nous nous retrouverions au début du fichier.
+	Cela réduirait la période à 10000.
+	En fait, il convient d'utiliser un nombre qui est premier par rapport à 1000000 pour obtenir la période maximale de 1000000.
+	
+	Notre premier choix s'est donc porté sur le nombre $n = 17$, qui est le premier nombre premier après 15.
+	Nous avons également réalisé différents tests pratiques et ce choix du paramètre s'est avéré le plus judicieux.
+	Afin de ne pas perturber le lecteur, nous n'avons pas inclus les tests des autres paramètres dans ce rapport.
+	Cependant, ces derniers sont facilement réalisables à l'aide du code fourni en annexe.
 	
 	\newpage
 	\section{Comparaison avec le générateur par défaut de Python}
@@ -336,87 +378,115 @@ D'après les tests effectués ci-dessus, les décimales de pi suivent une loi un
 	
 	\newpage
 	\subsection{Test de Kolmogorov-Smirnov}
-	Le test de Kolmogorov-Smirnov est un test vérifiant si les valeurs générés pseudo-aléatoirement sont réparties uniformément entre 0 et 1.
+	Le test de Kolmogorov-Smirnov est un test vérifiant si les valeurs générées pseudo-aléatoirement sont réparties uniformément entre 0 et 1.
 	
-	Pour effectuer ce test, nous générons 100 000 nombres avec notre générateur ainsi que 100 000 nombres avec le générateur de Python.
+	Pour effectuer ce test, nous générons 1 000 000 de nombres avec notre générateur ainsi que 1 000 000 de nombres avec le générateur de Python.
 	Ensuite, nous divisons l'intervalle [0, 1] en 100 valeurs réparties uniformément.
 	Pour chaque valeur, nous analysons la proportion de nombres de chaque générateur se trouvant en dessous de cette valeur.
-	Nous comparons la proportion de chaque générateur avec la proportion attendue d'une loi uniforme et nous en prenons le plus grand écart ($D_n$).
+	Cette proportion correspond à la fonction de répartition et est notée $F_n(x)$.
+	Dans le cas où le générateur suit une loi uniforme, la fonction de répartition serait :
 	
-	À l'aide de la table de Kolmogorov-Smirnov, nous pouvons accepter ou refuser l'hypothèse disant que les générateurs suivent une loi uniforme.
+	\begin{equation*}
+		F(x) = 
+		\begin{cases}
+			0 & \text{si } x < 0 \\
+			1 & \text{si } x > 1\\
+			x & \text{sinon }\\
+		\end{cases}
+	\end{equation*}
 	
-	Nous pouvons également aller plus loin et comparer les $D_n$ obtenus pour chaque générateur
-	 Il est évident que le générateur ayant le plus petit $D_n$ sera celui se rapprochant d'avantage de la loi uniforme.
+	Nous comparons ensuite les fonctions de répartition pratiques $F_n(x)$ et théoriques $F(x)$ en notant le plus grand écart $D_n$. 
+	À l'aide de la table de Kolmogorov-Smirnov, nous pouvons lire la valeur critique $D_\alpha$ correspondant à notre nombre d'échantillons $n$ et notre valeur critique $\alpha$ (analogue à celle du $\chi^2$).
+	Si $D_n > D_\alpha$, il convient de rejeter l'hypothèse selon laquelle ce générateur suit une loi uniforme.
+	
+	Pour un nombre d'échantillons $n > 50$, il existe une formule pour calculer cette valeur critique :
+	\begin{equation*}
+		D_\alpha = \sqrt{
+			\frac{
+			- \frac{1}{2} * \ln{\frac{\alpha}{2}}
+			}{n}
+		}
+	\end{equation*}
+	
+	Nous pouvons également aller plus loin et comparer les $D_n$ obtenus pour chaque générateur. Plus $D_n$ est petit, plus le générateur se rapproche de la loi uniforme et meilleur il est.
+	
+	\newpage
+	Résultats du test :
 	\begin{figure}[h]
 		\centering
 		\begin{tabular}{|r|r|r|r|}
 			\hline
-			X & Valeurs attendues & Valeurs de Pi & Valeurs de Python\\
+			$x$ & $F(x)$ & $F_n(x)$ Pi & $F_n(x)$ Python\\
 			\hline
-			0.01 & 0.01 & 0.01008 & 0.01019\\
-			0.02 & 0.02 & 0.02001 & 0.02041\\
-			0.03 & 0.03 & 0.03026 & 0.03055\\
-			0.04 & 0.04 & 0.03993 & 0.04118\\
-			0.05 & 0.05 & 0.04986 & 0.05164\\
-			0.06 & 0.06 & 0.05944 & 0.06145\\
-			0.07 & 0.07 & 0.06959 & 0.07172\\
-			0.08 & 0.08 & 0.0794 & 0.08185\\
-			0.09 & 0.09 & 0.08891 & 0.09194\\
-			0.1 & 0.1 & 0.09909 & 0.10154\\
+			0.01 & 0.01 & 0.009938 & 0.010077\\
+			0.02 & 0.02 & 0.019829 & 0.020109\\
+			0.03 & 0.03 & 0.029877 & 0.030099\\
+			0.04 & 0.04 & 0.039915 & 0.040026\\
+			0.05 & 0.05 & 0.049863 & 0.050101\\
+			0.06 & 0.06 & 0.059905 & 0.060362\\
+			0.07 & 0.07 & 0.069801 & 0.070405\\
+			0.08 & 0.08 & 0.079752 & 0.080280\\
+			0.09 & 0.09 & 0.089925 & 0.090444\\
+			0.10 & 0.10 & 0.099959 & 0.100334\\
 			... & ... & ... & ...\\
-			0.45 & 0.45 & 0.44995 & 0.45082\\
-			0.46 & 0.46 & 0.4601 & 0.46057\\
-			0.47 & 0.47 & 0.47026 & 0.47057\\
-			0.48 & 0.48 & 0.48063 & 0.48064\\
-			0.49 & 0.49 & 0.49032 & 0.49075\\
-			0.5 & 0.5 & 0.50059 & 0.50101\\
-			0.51 & 0.51 & 0.51073 & 0.51043\\
-			0.52 & 0.52 & 0.52031 & 0.52009\\
-			0.53 & 0.53 & 0.53065 & 0.53072\\
-			0.54 & 0.54 & 0.54064 & 0.54095\\
-			0.55 & 0.55 & 0.55076 & 0.55057\\
+			0.45 & 0.45 & 0.449946 & 0.450557\\
+			0.46 & 0.46 & 0.459981 & 0.460541\\
+			0.47 & 0.47 & 0.470174 & 0.470473\\
+			0.48 & 0.48 & 0.480217 & 0.480434\\
+			0.49 & 0.49 & 0.490131 & 0.490429\\
+			0.50 & 0.50 & 0.500202 & 0.500360\\
+			0.51 & 0.51 & 0.510268 & 0.510548\\
+			0.52 & 0.52 & 0.520059 & 0.520405\\
+			0.53 & 0.53 & 0.530114 & 0.530331\\
+			0.54 & 0.54 & 0.540164 & 0.540338\\
+			0.55 & 0.55 & 0.550358 & 0.550515\\
 			... & ... & ... & ...\\
-			0.9 & 0.9 & 0.8998 & 0.90023\\
-			0.91 & 0.91 & 0.90979 & 0.91049\\
-			0.92 & 0.92 & 0.91907 & 0.92049\\
-			0.93 & 0.93 & 0.92897 & 0.93025\\
-			0.94 & 0.94 & 0.93927 & 0.94029\\
-			0.95 & 0.95 & 0.94987 & 0.95097\\
-			0.96 & 0.96 & 0.95941 & 0.96029\\
-			0.97 & 0.97 & 0.96985 & 0.96935\\
-			0.98 & 0.98 & 0.9798 & 0.97962\\
-			0.99 & 0.99 & 0.98989 & 0.98957\\
+			0.90 & 0.90 & 0.899894 & 0.900212\\
+			0.91 & 0.91 & 0.909808 & 0.910198\\
+			0.92 & 0.92 & 0.919816 & 0.920301\\
+			0.93 & 0.93 & 0.929801 & 0.930276\\
+			0.94 & 0.94 & 0.939854 & 0.940290\\
+			0.95 & 0.95 & 0.950093 & 0.950184\\
+			0.96 & 0.96 & 0.960108 & 0.960128\\
+			0.97 & 0.97 & 0.969959 & 0.969998\\
+			0.98 & 0.98 & 0.979862 & 0.980039\\
+			0.99 & 0.99 & 0.989916 & 0.989981\\
 			\hline
 		\end{tabular}
-	\caption{Tableau de Kolmogorov-Smirnov}
+		\caption{Tableau de Kolmogorov-Smirnov}
 	\end{figure}
 	
+	\newpage
+	Graphique :
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.25]{../chart_images/kolmogorov-smirnov_bar_chart.png}
 		\caption{Graphique de Kolmogorov-Smirnov}
 	\end{figure}
 	
+	Écarts et valeurs critiques :
 	\begin{figure}[h]
 		\centering
 		\begin{tabular}{|r|r|r|r|r|}
 			\hline
-			$\alpha$ & Valeur Pi & Valeur Python & Limite & Meilleur\\
+			$\alpha$ & $D_n$ Pi & $D_n$ Python & $D_{\alpha}$ & Meilleur\\
 			\hline
-			0.001 & 0.00212 & 0.00194 & 0.006165 & Python\\
-			0.01 & 0.00212 & 0.00194 & 0.005147 & Python\\
-			0.05 & 0.00212 & 0.00194 & 0.004295 & Python\\
-			0.1 & 0.00212 & 0.00194 & 0.00387 & Python\\
+			0.001 & 0.000708 & 0.000849 & 0.001949 & Pi\\
+			0.010 & 0.000708 & 0.000849 & 0.001628 & Pi\\
+			0.050 & 0.000708 & 0.000849 & 0.001358 & Pi\\
+			0.100 & 0.000708 & 0.000849 & 0.001224 & Pi\\
 			\hline
 		\end{tabular}
-		\caption{Tableau des $D_\alpha$}
+		\caption{Tableau de Kolmogorov-Smirnov}
 	\end{figure}
 	
-	\newpage
-	Nous remarquons que le générateur de Python est meilleur dans ce test.
-	Cependant, si on répète ce test, il est possible d'obtenir des résultats différents.
-	En effet, tant que le nombre de nombres générés sera inférieur au plus petit commun multiple entre la période des deux générateurs, nous obtiendrons des nombres et donc des résultats différents.
+	Nous remarquons que les deux générateurs passent ce test avec tous les $\alpha$ choisis.
+	Nous remarquons également que notre générateur fait mieux que le générateur de Python.
 	
+	Attention cependant à l'interprétation hâtive des résultats.
+	En effet, tant que nous n'avons pas étudié \textbf{tous} les nombres générés par les deux générateurs (l'entièreté de leur période), de nouveaux nombres pourraient apparaître lors d'une prochaine exécution. Nous pourrions donc obtenir un résultat différent.
+	
+	% TODO pourquoi pas tous les nombres ?
 	
 \newpage
 \subsection{Test du gap}
@@ -568,7 +638,7 @@ Nous observons, ici aussi, que les valeurs sont proches des valeurs théoriques 
 
 \newpage
 
-\subsection{Le collectionneur de coupons}
+\subsection{Test du collectionneur de coupons}
 
 Tout comme nous l'avons précédemment effectué sur les décimales de Pi, nous allons ici effectuer le même test sur le générateur de python.
 
@@ -650,7 +720,7 @@ $\alpha$ & AValeur & Limite & Résultat\\
 Nous pouvons donc conclure, par les tests réussis, que le générateur suit lui aussi une loi uniforme.
   	
 	\newpage
-	\subsection{Interprétation des tests}
+	\subsection{Interprétation des résultats}
 	Malgré la simplicité de notre générateur, celui-ci donne de très bons résultats.
 	Cela peut s'expliquer par le fait que nous n'avons effectué nos tests que sur un nombre limité de nombres générés. 
 	En effet, la période de notre générateur est de 200 000 alors que la période du générateur de Python (Mersenne Twister) est de $2^{19937}$.

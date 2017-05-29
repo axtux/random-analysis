@@ -2,12 +2,13 @@ import pi
 import time
 from _is_ import is_int
 
+DEFAULT_PATH = 17
 
 def init():
   """DO :
-  - get pi digits and calculate len
+  - get pi digits and compute len
   - set default path
-  - add randomness to start point with ms time
+  - add randomness to start point from ms timestamp
   """
   global digits, l, i
 
@@ -18,7 +19,7 @@ def init():
   l = len(digits)
 
   # set default path
-  set_path(17)
+  set_path(DEFAULT_PATH)
 
   # add randomness to start point with ms time
   i = int(time.time()*1000) % l
@@ -47,15 +48,16 @@ def random() :
 
   return int(s) * mult
 
-def generate(number):
-    init()
-    rep=[]
-    for i in range(number):
-        rep.append(random())
-    return rep
+def generate(number) :
+  return [random() for i in range(number)]
+
+def period() :
+  i = 1
+  while (i*l)%path != 0 :
+    i += 1
+  return i*l/path
 
 init()
 if __name__ == "__main__" :
-  num = generate(20)
-  for i in num :
+  for i in generate(20) :
       print (i)

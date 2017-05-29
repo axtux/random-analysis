@@ -75,22 +75,21 @@ def make_test(n=10**3) :
   
   result = {}
   result['$\\alpha$'] = []
-  result['AValeur Pi'] = []
-  result['AValeur Python'] = []
-  result['Limite'] = []
+  result['A$D_n$ Pi'] = []
+  result['A$D_n$ Python'] = []
+  result['$D_\\alpha$'] = []
   result['Meilleur'] = []
   
   for alpha in sorted(alphas) :
     result['$\\alpha$'].append(alpha)
-    result['AValeur Pi'].append(pi_dn)
-    result['AValeur Python'].append(py_dn)
-    result['Limite'].append(dn(alpha, n))
+    result['A$D_n$ Pi'].append(pi_dn)
+    result['A$D_n$ Python'].append(py_dn)
+    result['$D_\\alpha$'].append(d_alpha(alpha, n))
     result['Meilleur'].append('Pi' if pi_dn < py_dn else 'Python')
   
   test.display(result, name, 6)
-  
 
-def dn(alpha, n) :
+def d_alpha(alpha, n) :
   if not is_int(n) :
     return print('n must be an integer')
   if n < 50 :
@@ -100,7 +99,7 @@ def dn(alpha, n) :
   if alpha <= 0 or alpha >= 1 :
     return print('alpha must be in ]0, 1[')
   
-  return math.sqrt(-0.5*math.log(alpha/2))/math.sqrt(n)
+  return math.sqrt( -0.5 * math.log(alpha/2) / n)
 
 if __name__ == '__main__' :
-  make_test(10**5)
+  make_test(10**6)

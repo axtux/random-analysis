@@ -20,4 +20,4 @@ if __name__ == "__main__" :
   
   print('Pi 10 first digits are', digits[:10])
   #l = len(digits)
-  print('Pi 999.990-1.000.000 digits are', digits[-10:])
+  print('Pi 10 last digits are', digits[-10:])
