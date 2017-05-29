@@ -3,12 +3,14 @@ import pi
 import pi_random
 import math
 import test
-import scipy
+
+def binomial(n, k) :
+  return math.factorial(n) / math.factorial(k) / math.factorial(n-k)
 
 def stirling(k, r) :
-    """number of manner to make r groups with k choices - not recursive version"""
+    """number of manner to make r groups with k choices, iterative version"""
 
-    return (1/math.factorial(r))*sum((-1)**(r-i)*scipy.special.binom(r, i)*i**k for i in range(r+1))
+    return sum((-1)**(r-i)*binomial(r, i)*i**k for i in range(r+1)) / math.factorial(r)
 
 def count(digits,r,d=10):
     """count the numbers of digits met before having met all the differents digits """
@@ -44,13 +46,10 @@ def count(digits,r,d=10):
 
 
 def expected_coupons(obs,d=10):
-
     rep = {}
-    totr=0
+    totr=sum(i for i in obs.values())
     t = len(obs)
-    for e in obs.values():#we compute the total of different sequence
-        totr+=e
-
+    
     for r in range(t-1):#have all the differents r sequence
         if (r<d):
             rep[r]=0
@@ -61,30 +60,18 @@ def expected_coupons(obs,d=10):
     rep[t]*=totr
     return rep
 
-def gen_python(size=1000000):# because there is one million decimal in pi file
-    """ This function generate size discrete values by the python generator (between 0 and 1)
+def generate_digits(generator, size) :
+    """generate digits from random number generator in [0, 1[
     and return all the values in a list  """
+    return [int(generator.random()*10) for i in range(size)]
 
-    digits=[]
-    for i in range(size):
-        digits.append(math.floor(random.random()*10))
-    return digits
-
-def gen_ours(size=1000000):
-    """ This function generate size discrete values by our generator based on Pi
-    and return all the values in a list  """
-
-    digits=[]
-    for i in range(size):
-        digits.append(math.floor(pi_random.random()*10))
-    return digits
-
-def do_test(name, digits ,limit=85):#good value to have a good test
-    """ This function is used to make the cupon collector test on the digits with a limited values"""
-
-    print ("################################################")
-    print (name)
-    print ("################################################")
+def do_test(name, digits, limit=85):
+    """ This function is used to make the cupon collector test on the digits with a limited values
+    limit : 85 is a good value with 10^6 digits to avoid empty classes"""
+    line = '##' + '#'*len(name) + '##'
+    print (line)
+    print ('# ' + name + ' #')
+    print (line)
 
     observed = count(digits,limit)
     expected = expected_coupons(observed)
@@ -94,7 +81,9 @@ def do_test(name, digits ,limit=85):#good value to have a good test
 
 
 if __name__ == "__main__" :
-
-    do_test("Les décimales de Pi",pi.get_digits())
-    do_test("Le générateur de python",gen_python())
-    do_test("Notre générateur",gen_ours())
+  pi_digits = pi.get_digits()
+  size = len(pi_digits)
+  
+  do_test("Les décimales de Pi", pi_digits)
+  do_test("Le générateur de python", generate_digits(random, size))
+  do_test("Notre générateur", generate_digits(pi_random, size))
