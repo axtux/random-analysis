@@ -80,7 +80,7 @@
 
 	Nous avons utilisé deux librairies externes :
 	\begin{itemize}
-		\item \textbf{scipy} : pour l'accès à la table des valeurs critiques du $\chi^2$ ;
+		\item \textbf{scipy} : pour l'accès à la table des valeurs de Kolmogorov-Smirnov ;
 		\item \textbf{plotly} : pour réaliser les graphiques.
 	\end{itemize}
 	
@@ -260,16 +260,6 @@ La probabilité qu'une séquence soit de longueur supérieure à une certaine li
 \hline
 Tailles de séquences & Valeur attendue & Valeur observée\\
 \hline
-0 & 0 & 0\\
-1 & 0 & 0\\
-2 & 0 & 0\\
-3 & 0 & 0\\
-4 & 0 & 0\\
-5 & 0 & 0\\
-6 & 0 & 0\\
-7 & 0 & 0\\
-8 & 0 & 0\\
-9 & 0 & 0\\
 10 & 12.39706944 & 12\\
 11 & 55.78681248 & 62\\
 12 & 143.186152032 & 154\\
@@ -291,6 +281,19 @@ Tailles de séquences & Valeur attendue & Valeur observée\\
 28 & 1321.07229861 & 1317\\
 29 & 1248.01086229 & 1224\\
 30 & 1171.89036844 & 1145\\
+\hline
+\end{tabular}
+\caption{Tableau de Test du CDC : Les décimales de Pi 1}
+\end{figure}
+
+
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+Tailles de séquences & Valeur attendue & Valeur observée\\
+\hline
 31 & 1094.67343335 & 1105\\
 32 & 1017.91330149 & 1018\\
 33 & 942.804564011 & 968\\
@@ -301,47 +304,8 @@ Tailles de séquences & Valeur attendue & Valeur observée\\
 38 & 615.116112395 & 640\\
 39 & 561.135537135 & 522\\
 40 & 511.091408294 & 506\\
-41 & 464.869130432 & 456\\
-42 & 422.313697469 & 406\\
-43 & 383.242942754 & 379\\
-44 & 347.457965104 & 351\\
-45 & 314.751212876 & 324\\
-46 & 284.912648965 & 280\\
-47 & 257.734360295 & 266\\
-48 & 233.013919451 & 219\\
-49 & 210.556755384 & 212\\
 50 & 190.177745431 & 185\\
-\hline
-\end{tabular}
-\caption{Tableau de Test du CDC : Les décimales de Pi 1}
-\end{figure}
-
-
-\begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|}
-\hline
-Tailles de séquences & Valeur attendue & Valeur observée\\
-\hline
-51 & 171.702202299 & 197\\
-52 & 154.966396843 & 142\\
-53 & 139.817729962 & 148\\
-54 & 126.114644036 & 115\\
-55 & 113.726345551 & 113\\
-56 & 102.532395165 & 87\\
-57 & 92.4222090177 & 95\\
-58 & 83.294505053 & 77\\
-59 & 75.0567200775 & 80\\
 60 & 67.624416886 & 69\\
-61 & 60.9206957291 & 66\\
-62 & 54.8756204189 & 62\\
-63 & 49.4256662748 & 59\\
-64 & 44.5131947077 & 44\\
-65 & 40.0859574053 & 39\\
-66 & 36.0966316837 & 34\\
-67 & 32.5023875297 & 32\\
-68 & 29.2644860878 & 22\\
-69 & 26.3479087976 & 22\\
 70 & 23.7210160015 & 27\\
 71 & 21.3552335886 & 25\\
 72 & 19.2247660837 & 27\\
@@ -360,7 +324,7 @@ Tailles de séquences & Valeur attendue & Valeur observée\\
 85 & 44.0637637982 & 48\\
 \hline
 \end{tabular}
-\caption{Tableau de Test du CDC : Les décimales de Pi 2}
+\caption{Tableau de Test du CDC : Les décimales de Pi 3}
 \end{figure}
 
 %\begin{figure}[h]
@@ -393,9 +357,9 @@ Nous remarquons que les valeurs du tableau sont proches des valeurs théoriques.
 
 Ce test confirme donc que les décimales de Pi suivent bien une loi uniforme, car les différents tests de $\chi^2$ sont respectés.
 
-\newpage
+
 \subsection{Interprétation des résultats}
-D'après les tests effectués ci-dessus, les décimales de pi suivent une loi uniforme.
+D'après les tests effectués ci-dessus, les décimales de pi suivent bien une loi uniforme.
 	
 	\newpage
 	\section{Générateur de loi uniforme à partir des décimales de $\pi$}
@@ -437,7 +401,7 @@ D'après les tests effectués ci-dessus, les décimales de pi suivent une loi un
 	Bien qu'il existe des méthodes de correspondance, d'autres tests sont plus appropriés pour tester des fonctions continues.
 	Dans ces tests se trouve notamment le test de Kolmogorov-Smirnov.
 	
-	\newpage
+
 	\subsection{Test de Kolmogorov-Smirnov}
 	Le test de Kolmogorov-Smirnov est un test vérifiant si les valeurs générées pseudo-aléatoirement sont réparties uniformément entre 0 et 1.
 	
@@ -715,16 +679,6 @@ Nous obtenons donc les tableaux de valeurs, les graphiques associés et les test
 \hline
 tailles de séquences & Valeur attendue & Valeur observée\\
 \hline
-0 & 0 & 0\\
-1 & 0 & 0\\
-2 & 0 & 0\\
-3 & 0 & 0\\
-4 & 0 & 0\\
-5 & 0 & 0\\
-6 & 0 & 0\\
-7 & 0 & 0\\
-8 & 0 & 0\\
-9 & 0 & 0\\
 10 & 12.42718848 & 8\\
 11 & 55.92234816 & 63\\
 12 & 143.534026944 & 162\\
@@ -746,6 +700,19 @@ tailles de séquences & Valeur attendue & Valeur observée\\
 28 & 1324.2818821 & 1339\\
 29 & 1251.0429409 & 1286\\
 30 & 1174.73751011 & 1165\\
+\hline
+\end{tabular}
+\caption{Tableau de Test du CDC : Notre générateur 1}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+tailles de séquences  & Valeur attendue & Valeur observée\\
+\hline
 31 & 1097.33297423 & 1072\\
 32 & 1020.38635139 & 1005\\
 33 & 945.095135062 & 983\\
@@ -756,59 +723,9 @@ tailles de séquences & Valeur attendue & Valeur observée\\
 38 & 616.610554842 & 625\\
 39 & 562.498832208 & 539\\
 40 & 512.333119704 & 508\\
-41 & 465.998543476 & 482\\
-42 & 423.339720854 & 408\\
-43 & 384.174042607 & 355\\
-44 & 348.302124314 & 364\\
-45 & 315.515910083 & 325\\
-46 & 285.604852515 & 287\\
-47 & 258.360533403 & 251\\
-48 & 233.580033531 & 210\\
-49 & 211.068309132 & 207\\
 50 & 190.639787783 & 188\\
-\hline
-\end{tabular}
-\caption{Tableau de Test du CDC : Notre générateur 1}
-\end{figure}
-
-
-\newpage
-
-\begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|}
-\hline
-tailles de séquences  & Valeur attendue & Valeur observée\\
-\hline
-51 & 172.119357783 & 185\\
-52 & 155.342892202 & 163\\
-53 & 140.157421195 & 153\\
-54 & 126.421043224 & 131\\
-55 & 114.002647008 & 114\\
-56 & 102.781500595 & 98\\
-57 & 92.6467514569 & 85\\
-58 & 83.4968714705 & 64\\
-59 & 75.2390725572 & 78\\
 60 & 67.7887123695 & 80\\
-61 & 61.0687043274 & 75\\
-62 & 55.0089423314 & 64\\
-63 & 49.5457473655 & 49\\
-64 & 44.6213408062 & 43\\
-65 & 40.1833474022 & 36\\
-66 & 36.184329498 & 35\\
-67 & 32.5813530235 & 33\\
-68 & 29.335585006 & 15\\
-69 & 26.4119218067 & 25\\
 70 & 23.7786468984 & 23\\
-71 & 21.4071167484 & 24\\
-72 & 19.2714732108 & 14\\
-73 & 17.3483807534 & 18\\
-74 & 15.6167868166 & 19\\
-75 & 14.0577036191 & 16\\
-76 & 12.6540097659 & 9\\
-77 & 11.3902700813 & 4\\
-78 & 10.2525721661 & 7\\
-79 & 9.22837826555 & 9\\
 80 & 8.30639112096 & 13\\
 81 & 7.47643257483 & 11\\
 82 & 6.7293337844 & 10\\
@@ -843,6 +760,7 @@ $\alpha$ & AValeur & Limite & Résultat\\
 \caption{Tableau de $\chi^2$}
 \end{figure}
 
+\newpage
 
 \begin{figure}[h]
 \centering
@@ -850,16 +768,6 @@ $\alpha$ & AValeur & Limite & Résultat\\
 \hline
 tailles de séquences & Valeur attendue & Valeur observée\\
 \hline
-0 & 0 & 0\\
-1 & 0 & 0\\
-2 & 0 & 0\\
-3 & 0 & 0\\
-4 & 0 & 0\\
-5 & 0 & 0\\
-6 & 0 & 0\\
-7 & 0 & 0\\
-8 & 0 & 0\\
-9 & 0 & 0\\
 10 & 12.4123104 & 14\\
 11 & 55.8553968 & 50\\
 12 & 143.36218512 & 143\\
@@ -891,56 +799,9 @@ tailles de séquences & Valeur attendue & Valeur observée\\
 38 & 615.872336284 & 610\\
 39 & 561.825397292 & 545\\
 40 & 511.719744189 & 513\\
-41 & 465.440640647 & 478\\
-42 & 422.832890026 & 429\\
-43 & 383.714101716 & 384\\
-44 & 347.885130006 & 341\\
-45 & 315.138168089 & 311\\
-46 & 285.262920641 & 268\\
-47 & 258.051218976 & 288\\
-48 & 233.300386816 & 257\\
-49 & 210.815613907 & 199\\
 50 & 190.411549995 & 192\\
-\hline
-\end{tabular}
-\caption{Tableau de Test du CDC : Le générateur de python 1}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|}
-\hline
-tailles de séquences & Valeur attendue & Valeur observée\\
-\hline
-51 & 171.913293026 & 168\\
-52 & 155.156912567 & 158\\
-53 & 139.989621911 & 132\\
-54 & 126.269689408 & 109\\
-55 & 113.866160746 & 108\\
-56 & 102.658448515 & 111\\
-57 & 92.5358329026 & 86\\
-58 & 83.3969073366 & 78\\
-59 & 75.1489948263 & 84\\
 60 & 67.7075543596 & 60\\
-61 & 60.9955916463 & 71\\
-62 & 54.9430845192 & 51\\
-63 & 49.4864302002 & 36\\
-64 & 44.5679192395 & 44\\
-65 & 40.1352390904 & 37\\
-66 & 36.1410088909 & 38\\
-67 & 32.5423459723 & 39\\
-68 & 29.3004638536 & 30\\
-69 & 26.3803009227 & 20\\
 70 & 23.750178624 & 27\\
-71 & 21.3814877176 & 31\\
-72 & 19.2484010155 & 17\\
-73 & 17.327610923 & 17\\
-74 & 15.5980900853 & 17\\
-75 & 14.0408734536 & 11\\
-76 & 12.6388601309 & 12\\
-77 & 11.3766334208 & 11\\
-78 & 10.2402975805 & 14\\
-79 & 9.21732986548 & 9\\
 80 & 8.29644654244 & 7\\
 81 & 7.46748163938 & 5\\
 82 & 6.72127729064 & 5\\
@@ -949,9 +810,9 @@ tailles de séquences & Valeur attendue & Valeur observée\\
 85 & 44.1179357995 & 35\\
 \hline
 \end{tabular}
-\caption{Tableau de Test du CDC : Le générateur de python 2}
+\caption{Tableau de Test du CDC : Le générateur de python }
 \end{figure}
-
+\newpage
 
 %\begin{figure}[h]
 %\centering
@@ -973,11 +834,11 @@ $\alpha$ & AValeur & Limite & Résultat\\
 \end{tabular}
 \caption{Tableau de $\chi^2$}
 \end{figure}
+    
+    
+Nous pouvons donc conclure, par les tests réussis, que les 2 générateurs suivent la loi uniforme. Nous remarquons ici aussi que les valeurs respectent, dans les deux cas, la forme d'une gaussienne
 
-
-Nous pouvons donc conclure, par les tests réussis, que 2 les générateurs suivent la loi uniforme.
-
-Nous pouvons aussi constater que le générateur de python réussit mieux les tests que notre générateur. 
+Nous pouvons aussi constater que le générateur de python réussit mieux les tests que notre générateur basé sur les décimales de Pi. 
   	
 	\newpage
 	\subsection{Interprétation des résultats}
@@ -991,7 +852,7 @@ Nous pouvons aussi constater que le générateur de python réussit mieux les te
 	
 	On peut finalement conclure que les décimales de Pi, ainsi que nos deux générateurs suivent bien une loi uniforme d'après nos différents tests.	
 	
-	\newpage
+	
 	\section{Conclusion}
 	Nous avons bien réalisé les objectifs fixés dans l'introduction, à savoir analyser le caractère aléatoire des décimales de pi, construire un générateur uniforme et le comparer au générateur par défaut de Python.
 	
