@@ -95,7 +95,7 @@
 		\end{tabular}
 	\end{center}
 	
-	Sur certains systèmes, les droits administrateurs sont requis pour installer ces librairies.
+	Sur certains systèmes, les droits administrateurs sont requis pour installer des librairies.
 	
 	\newpage
 	\section{Les décimales de $\pi$}
@@ -225,20 +225,16 @@
 \newpage
 	
 \subsection{Test du collectionneur de coupons}
-Le collectionneur de coupons est un test permettant de vérifier si nos différentes décimales de Pi suivent une loi uniforme.
- 
-Le fonctionnement de ce test que nous avons adapté à notre problème se déroule comme ceci:  
+Le collectionneur de coupons est un test vérifiant la longueur des séquences contenant toutes les décimales. Le fonctionnement est le suivant :  
 \begin{itemize}
-\item Nous parcourons les différentes décimales de Pi dans l'ordre, en calculant le nombres de digits visités.
-\item Lorsque nous avons rencontrés tous les différents digits (de 0 à 9) dans une séquence donnée de taille r, nous gardons la valeur r en mémoire.
-\item Nous recommençons ensuite le procédé avec les décimales qui suivent 
+	\item En fonction du nombre de décimales, nous choisissons une taille maximale à comptabiliser. Les séquences dépassant cette limite seront comptabilisées ensemble à la fin du tableau. Nous avons choisi 85 afin de na pas avoir de classes vides mais de garder un nombre de classes assez élevé.
+\item Nous parcourons les différentes décimales de Pi dans l'ordre, en calculant la taille des séquences successives contenant tous les digits (de 0 à 9).
+\item Nous tenons compte du nombre de séquences de chaque taille qui a été parcourue.
 \end{itemize}
 
-Nous obtenons ainsi les différentes occurrences de séquences de tailles $r_i$ contenant tout les différents digits.
+Nous comparons ensuite la taille des séquences observées à la valeur théorique suivant une loi uniforme, et ceci à l'aide d'un $\chi^2$.
 
-Nous comparons ensuite cette valeur à la valeur théorique suivant une loi uniforme, et ceci à l'aide d'un $\chi^2$.
-
-Nous calculons la valeur théorique à l'aide de la probabilité $ S_r$ ci-dessous. Celle-ci représente la probabilité de rencontrer r digits avant d'avoir rencontré tout les différents digits possibles. r est donc la longueur de la séquence contenants les digits.
+Nous calculons la valeur théorique à l'aide de la probabilité $ S_r$ ci-dessous. Celle-ci représente la probabilité qu'une séquence de longueur r contienne toutes les décimales. Ici, d représente le nombre de décimales différentes possibles (10 dans notre cas).
 
 \begin{figure}[h]
 		\centering
@@ -246,18 +242,9 @@ Nous calculons la valeur théorique à l'aide de la probabilité $ S_r$ ci-desso
 \caption{Probabilité de Coupons}
 	\end{figure}
 
-\textbf{où} d est le nombre de différents digits possibles (il vaut 10 dans notre cas)
+\textbf{Remarque :} $S_r$ sera égal à 0 lorsque r < d. En effet, il est improbable qu'une séquence de longueur inférieure à d contienne d différentes décimales.
 
-\textbf{Remarque :} $S_r$ sera égal à 0 lorsque r<d, donc lorsque r<10.
-
- 
-
-Ceci s'explique par le fait qu'il est impossible de rencontrer tout les différents digits, puisque la séquence est plus petite que le nombre des digits (qui vaut ici 10). \\
-
-Nous obtenons donc le tableau de valeurs ci-dessous pour les différentes longueurs de séquences , ainsi que le graphique correspondant, et le tableau représentant nos tests de $\chi^2$.
-
-Dans le tableau, la dernière taille de séquence (ici elle vaut 85), stocke toutes les tailles de séquences plus grandes.
-La loi de probabilité permettant de trouver cette valeur à une taille de séquence t est celle-ci :
+La probabilité qu'une séquence soit de longueur supérieure à une certaine limite t (ici 85) est la suivante :
 
 \begin{figure}[h]
 		\centering
