@@ -1,5 +1,6 @@
 import random
 import pi
+import pi_random
 import math
 import test
 import scipy
@@ -54,27 +55,40 @@ def expected_coupons(obs,d=10):
             rep[r]=stirling(r-1,d-1)*(math.factorial(d)/(d**r))*totr
     return rep
 
+def gen_python(size=1000000):# because there is one million decimal in pi file
+    """ This function generate size discrete values by the python generator (between 0 and 1)
+    and return all the values in a list  """
+
+    digits=[]
+    for i in range(size):
+        digits.append(math.floor(random.random()*10))
+    return digits
+
+def gen_ours(size=1000000):
+    """ This function generate size discrete values by our generator based on Pi
+    and return all the values in a list  """
+
+    digits=[]
+    for i in range(size):
+        digits.append(math.floor(pi_random.random()*10))
+    return digits
+
+def do_test(name, digits ,limit=85):#good value to have a good test
+    """ This function is used to make the cupon collector test on the digits with a limited values"""
+
+    print ("################################################")
+    print (name)
+    print ("################################################")
+
+    observed = count(digits,limit)
+    expected = expected_coupons(observed)
+
+    test.make_test(observed, expected, 'Test du CDC : '+name, 'r', 'Nombre d\'occurences')
+
+
+
 if __name__ == "__main__" :
 
-    print ("################################################")
-    print ("Test sur les décimales de Pi")
-    print ("################################################")
-
-    digits = pi.get_digits()#str of digits
-    observed = count(digits,101)#good value to have a good test
-    expected = expected_coupons(observed)
-
-    test.make_test(observed, expected, 'Collectionneur de coupons', 'r', 'Nombre d\'occurences')
-
-    print ("################################################")
-    print ("Test sur python")
-    print ("################################################")
-
-    digits =[]
-    for i in range(1000000):# because there is one million decimal in pi file
-        digits.append(math.floor(random.random()*10))
-
-    observed = count(digits,101)#good value to have a good test
-    expected = expected_coupons(observed)
-
-    test.make_test(observed, expected, 'Collectionneur de coupons', 'r', 'Nombre d\'occurences')
+    do_test("Les décimales de Pi",pi.get_digits())
+    do_test("Le générateur de python",gen_python())
+    do_test("Notre générateur",gen_ours())
