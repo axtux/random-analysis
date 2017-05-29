@@ -243,7 +243,7 @@ Nous calculons la valeur théorique à l'aide de la probabilité $ S_r$ ci-desso
 \begin{figure}[h]
 		\centering
 \includegraphics[scale=0.4]{images/formule.png}  
-\caption{Graphique du Poker}
+\caption{Probabilité de Coupons}
 	\end{figure}
 
 \textbf{où} d est le nombre de différents digits possibles (il vaut 10 dans notre cas)
@@ -252,82 +252,156 @@ Nous calculons la valeur théorique à l'aide de la probabilité $ S_r$ ci-desso
 
  
 
-Ceci s'explique par le fait qu'il est impossible de rencontrer tout les différents digits, puisque la séquence est plus petite que le nombre des digits (qui vaut ici 10). 
+Ceci s'explique par le fait qu'il est impossible de rencontrer tout les différents digits, puisque la séquence est plus petite que le nombre des digits (qui vaut ici 10). \\
 
-Nous obtenons donc le tableau de valeurs suivant pour les différentes longueurs de séquences , ainsi que le graphique correspondant, et le tableau représentant nos tests de $\chi^2$. .
+Nous obtenons donc le tableau de valeurs ci-dessous pour les différentes longueurs de séquences , ainsi que le graphique correspondant, et le tableau représentant nos tests de $\chi^2$.
+
+Dans le tableau, la dernière taille de séquence (ici elle vaut 85), stocke toutes les tailles de séquences plus grandes.
+La loi de probabilité permettant de trouver cette valeur à une taille de séquence t est celle-ci :
+
+\begin{figure}[h]
+		\centering
+\includegraphics[scale=0.4]{images/formule2.png}  
+\caption{Probabilité de Coupons, dernière classe}
+	\end{figure}
 
 \newpage
 
 \begin{figure}[h]
-		\centering
+\centering
 \begin{tabular}{|r|r|r|}
 \hline
-Collectionneur de coupons & Valeur attendue & Valeur observée\\
+Tailles de séquences & Valeur attendue & Valeur observée\\
 \hline
-0-9 & 0 & 0\\
-10 & 12.39307776 & 12\\
-11 & 55.76884992 & 62\\
-12 & 143.140048128 & 154\\
-13 & 276.055807104 & 265\\
-14 & 445.533624088 & 496\\
-15 & 636.400653977 & 645\\
-16 & 831.928596481 & 869\\
-17 & 1017.20430344 & 1008\\
-18 & 1180.91435762 & 1150\\
-19 & 1315.83993579 & 1341\\
-20 & 1418.52980752 & 1354\\
-... & ... & ...\\
-45 & 314.649867464 & 324\\
-46 & 284.820911145 & 280\\
-47 & 257.651373497 & 266\\
-48 & 232.938892283 & 219\\
-49 & 210.488959104 & 212\\
-50 & 190.116510903 & 185\\
-51 & 171.646916633 & 197\\
-52 & 154.916499868 & 142\\
-53 & 139.772710642 & 148\\
-54 & 126.074036915 & 115\\
-55 & 113.689727286 & 113\\
-... & ... & ...\\
-90 & 2.88994755473 & 0\\
-91 & 2.60102568515 & 1\\
-92 & 2.34098142576 & 4\\
-93 & 2.10692993077 & 4\\
-94 & 1.89627425595 & 0\\
-95 & 1.7066766851 & 1\\
-96 & 1.53603290049 & 1\\
-97 & 1.38244871762 & 4\\
-98 & 1.24421913165 & 0\\
-99 & 1.11980944715 & 2\\
-100 & 1.0078382854 & 0\\
-101 & 0.907062283239 & 1\\
+0 & 0 & 0\\
+1 & 0 & 0\\
+2 & 0 & 0\\
+3 & 0 & 0\\
+4 & 0 & 0\\
+5 & 0 & 0\\
+6 & 0 & 0\\
+7 & 0 & 0\\
+8 & 0 & 0\\
+9 & 0 & 0\\
+10 & 12.39706944 & 12\\
+11 & 55.78681248 & 62\\
+12 & 143.186152032 & 154\\
+13 & 276.144721776 & 265\\
+14 & 445.677125782 & 496\\
+15 & 636.605631934 & 645\\
+16 & 832.196551932 & 869\\
+17 & 1017.53193425 & 1008\\
+18 & 1181.29471772 & 1150\\
+19 & 1316.26375399 & 1341\\
+20 & 1418.98670105 & 1354\\
+21 & 1489.0470501 & 1482\\
+22 & 1528.21745078 & 1576\\
+23 & 1539.67053158 & 1515\\
+24 & 1527.32748565 & 1543\\
+25 & 1495.36642995 & 1456\\
+26 & 1447.88033297 & 1470\\
+27 & 1388.65981367 & 1345\\
+28 & 1321.07229861 & 1317\\
+29 & 1248.01086229 & 1224\\
+30 & 1171.89036844 & 1145\\
+31 & 1094.67343335 & 1105\\
+32 & 1017.91330149 & 1018\\
+33 & 942.804564011 & 968\\
+34 & 870.235668768 & 883\\
+35 & 800.839427633 & 817\\
+36 & 735.039345563 & 772\\
+37 & 673.090709825 & 680\\
+38 & 615.116112395 & 640\\
+39 & 561.135537135 & 522\\
+40 & 511.091408294 & 506\\
+41 & 464.869130432 & 456\\
+42 & 422.313697469 & 406\\
+43 & 383.242942754 & 379\\
+44 & 347.457965104 & 351\\
+45 & 314.751212876 & 324\\
+46 & 284.912648965 & 280\\
+47 & 257.734360295 & 266\\
+48 & 233.013919451 & 219\\
+49 & 210.556755384 & 212\\
+50 & 190.177745431 & 185\\
 \hline
 \end{tabular}
-\caption{Tableau du Collectionneur De Coupons 2}
-	\end{figure}
+\caption{Tableau de Test du CDC : Les décimales de Pi 1}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+Tailles de séquences & Valeur attendue & Valeur observée\\
+\hline
+51 & 171.702202299 & 197\\
+52 & 154.966396843 & 142\\
+53 & 139.817729962 & 148\\
+54 & 126.114644036 & 115\\
+55 & 113.726345551 & 113\\
+56 & 102.532395165 & 87\\
+57 & 92.4222090177 & 95\\
+58 & 83.294505053 & 77\\
+59 & 75.0567200775 & 80\\
+60 & 67.624416886 & 69\\
+61 & 60.9206957291 & 66\\
+62 & 54.8756204189 & 62\\
+63 & 49.4256662748 & 59\\
+64 & 44.5131947077 & 44\\
+65 & 40.0859574053 & 39\\
+66 & 36.0966316837 & 34\\
+67 & 32.5023875297 & 32\\
+68 & 29.2644860878 & 22\\
+69 & 26.3479087976 & 22\\
+70 & 23.7210160015 & 27\\
+71 & 21.3552335886 & 25\\
+72 & 19.2247660837 & 27\\
+73 & 17.3063345114 & 17\\
+74 & 15.5789373362 & 8\\
+75 & 14.0236327962 & 12\\
+76 & 12.6233409926 & 12\\
+77 & 11.3626641589 & 5\\
+78 & 10.2277236148 & 13\\
+79 & 9.20601199223 & 9\\
+80 & 8.28625941323 & 12\\
+81 & 7.45831238842 & 8\\
+82 & 6.71302429704 & 7\\
+83 & 6.04215639528 & 8\\
+84 & 5.43828838508 & 4\\
+85 & 44.0637637982 & 48\\
+\hline
+\end{tabular}
+\caption{Tableau de Test du CDC : Les décimales de Pi 2}
+\end{figure}
+
+%\begin{figure}[h]
+%\centering
+%\includegraphics[scale=0.25]{../chart_images/test_du_cdc_:_les_decimales_de_pi_bar_chart.png}
+%\caption{Graphique de Test du CDC : Les décimales de Pi}
+%\end{figure}
 
 \newpage
 
-\begin{figure}[h]
-		\centering
-\includegraphics[scale=0.25]{../chart_images/collectionneur_de_coupons_bar_chart.png}
-\caption{Graphique du Collectionneur De Coupons}
-	\end{figure}
+
 
 \begin{figure}[h]
-		\centering
+\centering
 \begin{tabular}{|r|r|r|r|}
 \hline
 $\alpha$ & AValeur & Limite & Résultat\\
 \hline
-0.001 & 79.837 & 150.667055668 & réussi\\
-0.01 & 79.837 & 136.971003847 & réussi\\
-0.05 & 79.837 & 125.458419408 & réussi\\
-0.1 & 79.837 & 119.588667243 & réussi\\
+0.001 & 60.226 & 131.041 & réussi\\
+0.010 & 60.226 & 118.236 & réussi\\
+0.050 & 60.226 & 107.522 & réussi\\
+0.100 & 60.226 & 102.079 & réussi\\
 \hline
 \end{tabular}
 \caption{Tableau de $\chi^2$}
-	\end{figure}
+\end{figure}
+
+
 Nous remarquons que les valeurs du tableau sont proches des valeurs théoriques. Ainsi que notre graphique suit la forme d'une gaussienne. 
 
 Ce test confirme donc que les décimales de Pi suivent bien une loi uniforme, car les différents tests de $\chi^2$ sont respectés.
@@ -640,67 +714,132 @@ Nous observons, ici aussi, que les valeurs sont proches des valeurs théoriques 
 
 \subsection{Test du collectionneur de coupons}
 
-Tout comme nous l'avons précédemment effectué sur les décimales de Pi, nous allons ici effectuer le même test sur le générateur de python.
+Tout comme nous l'avons précédemment effectué sur les décimales de Pi, nous allons ici effectuer le même test sur le générateur de python et notre générateur. Nous avons ainsi pu comparer leurs résultats vis-à-vis de ce test.\\
 
 Afin d'effectuer ce test comme précédemment, nous avons du avoir recourt à une petite adaptation. 
 
-Nous avons donc discrétiser 1 million de nombres générés aléatoirement par python entre 0 et 1. Nous avons choisis ce nombre en rapport avec notre notre nombre de Pi qui possède 1 million de décimales.
+Nous avons donc discrétiser 1 million de nombres générés aléatoirement par python entre 0 et 1. Nous avons aussi utilisé la même méthode sur notre générateur. \\
 
-Nous obtenons donc le tableau de valeurs, le graphique associé et les test de $\chi^2$ suivants :
-
- \begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|}
-\hline
-Collectionneur de coupons & Valeur attendue & Valeur observée\\
-\hline
-0-9 & 0 & 0\\
-10 & 12.40614144 & 7\\
-11 & 55.82763648 & 59\\
-12 & 143.290933632 & 151\\
-13 & 276.346800576 & 268\\
-14 & 446.003265996 & 462\\
-15 & 637.071490928 & 643\\
-16 & 832.805541594 & 810\\
-17 & 1018.27654972 & 1016\\
-18 & 1182.15917248 & 1166\\
-19 & 1317.22697718 & 1336\\
-20 & 1420.02509544 & 1436\\
-... & ... & ...\\
-45 & 314.98154336 & 300\\
-46 & 285.12114401 & 307\\
-47 & 257.922966653 & 258\\
-48 & 233.18443574 & 219\\
-49 & 210.710837838 & 198\\
-50 & 190.316914815 & 194\\
-51 & 171.827851541 & 157\\
-52 & 155.07979906 & 163\\
-53 & 139.920046598 & 127\\
-54 & 126.206932948 & 127\\
-55 & 113.809568882 & 121\\
-... & ... & ...\\
-... & ... & ...\\
-90 & 2.89299388033 & 3\\
-91 & 2.60376745503 & 2\\
-92 & 2.34344908011 & 3\\
-93 & 2.10915086885 & 1\\
-94 & 1.89827313956 & 2\\
-95 & 1.70847571183 & 2\\
-96 & 1.53765204971 & 1\\
-97 & 1.38390597207 & 3\\
-98 & 1.24553067677 & 0\\
-99 & 1.12098985065 & 1\\
-100 & 1.00890065885 & 0\\
-101 & 0.9080184276 & 0\\
-\hline
-\end{tabular}
-\caption{Tableau de Collectionneur de coupons 2}
-\end{figure}
+Nous obtenons donc les tableaux de valeurs, les graphiques associés et les tests de $\chi^2$ suivants :
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.25]{../chart_images/collectionneur_de_coupons_bar_chart.png}
+\begin{tabular}{|r|r|r|}
+\hline
+tailles de séquences & Valeur attendue & Valeur observée\\
+\hline
+0 & 0 & 0\\
+1 & 0 & 0\\
+2 & 0 & 0\\
+3 & 0 & 0\\
+4 & 0 & 0\\
+5 & 0 & 0\\
+6 & 0 & 0\\
+7 & 0 & 0\\
+8 & 0 & 0\\
+9 & 0 & 0\\
+10 & 12.42718848 & 8\\
+11 & 55.92234816 & 63\\
+12 & 143.534026944 & 162\\
+13 & 276.815623392 & 301\\
+14 & 446.759911294 & 478\\
+15 & 638.152283793 & 633\\
+16 & 834.218397608 & 862\\
+17 & 1020.00405762 & 1058\\
+18 & 1184.16470752 & 1195\\
+19 & 1319.46165499 & 1279\\
+20 & 1422.43417043 & 1420\\
+21 & 1492.66473313 & 1481\\
+22 & 1531.93029943 & 1526\\
+23 & 1543.41120583 & 1577\\
+24 & 1531.03817211 & 1521\\
+25 & 1498.99946609 & 1533\\
+26 & 1451.39800026 & 1442\\
+27 & 1392.03360299 & 1335\\
+28 & 1324.2818821 & 1339\\
+29 & 1251.0429409 & 1286\\
+30 & 1174.73751011 & 1165\\
+31 & 1097.33297423 & 1072\\
+32 & 1020.38635139 & 1005\\
+33 & 945.095135062 & 983\\
+34 & 872.349931581 & 864\\
+35 & 802.785090265 & 741\\
+36 & 736.825144986 & 744\\
+37 & 674.726003239 & 666\\
+38 & 616.610554842 & 625\\
+39 & 562.498832208 & 539\\
+40 & 512.333119704 & 508\\
+41 & 465.998543476 & 482\\
+42 & 423.339720854 & 408\\
+43 & 384.174042607 & 355\\
+44 & 348.302124314 & 364\\
+45 & 315.515910083 & 325\\
+46 & 285.604852515 & 287\\
+47 & 258.360533403 & 251\\
+48 & 233.580033531 & 210\\
+49 & 211.068309132 & 207\\
+50 & 190.639787783 & 188\\
+\hline
+\end{tabular}
+\caption{Tableau de Test du CDC : Notre générateur 1}
 \end{figure}
+
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+tailles de séquences  & Valeur attendue & Valeur observée\\
+\hline
+51 & 172.119357783 & 185\\
+52 & 155.342892202 & 163\\
+53 & 140.157421195 & 153\\
+54 & 126.421043224 & 131\\
+55 & 114.002647008 & 114\\
+56 & 102.781500595 & 98\\
+57 & 92.6467514569 & 85\\
+58 & 83.4968714705 & 64\\
+59 & 75.2390725572 & 78\\
+60 & 67.7887123695 & 80\\
+61 & 61.0687043274 & 75\\
+62 & 55.0089423314 & 64\\
+63 & 49.5457473655 & 49\\
+64 & 44.6213408062 & 43\\
+65 & 40.1833474022 & 36\\
+66 & 36.184329498 & 35\\
+67 & 32.5813530235 & 33\\
+68 & 29.335585006 & 15\\
+69 & 26.4119218067 & 25\\
+70 & 23.7786468984 & 23\\
+71 & 21.4071167484 & 24\\
+72 & 19.2714732108 & 14\\
+73 & 17.3483807534 & 18\\
+74 & 15.6167868166 & 19\\
+75 & 14.0577036191 & 16\\
+76 & 12.6540097659 & 9\\
+77 & 11.3902700813 & 4\\
+78 & 10.2525721661 & 7\\
+79 & 9.22837826555 & 9\\
+80 & 8.30639112096 & 13\\
+81 & 7.47643257483 & 11\\
+82 & 6.7293337844 & 10\\
+83 & 6.0568359896 & 4\\
+84 & 5.45150086454 & 8\\
+85 & 44.1708179912 & 43\\
+\hline
+\end{tabular}
+\caption{Tableau de Test du CDC : Notre générateur 2}
+\end{figure}
+
+
+%\begin{figure}[h]
+%\centering
+%\includegraphics[scale=0.25]{../chart_images/test_du_cdc_:_notre_generateur_bar_chart.png}
+%\caption{Graphique de Test du CDC : Notre générateur}
+%\end{figure}
+
 
 \begin{figure}[h]
 \centering
@@ -708,16 +847,150 @@ Collectionneur de coupons & Valeur attendue & Valeur observée\\
 \hline
 $\alpha$ & AValeur & Limite & Résultat\\
 \hline
-0.001 & 70.467 & 150.667055668 & réussi\\
-0.01 & 70.467 & 136.971003847 & réussi\\
-0.05 & 70.467 & 125.458419408 & réussi\\
-0.1 & 70.467 & 119.588667243 & réussi\\
+0.001 & 73.868 & 131.041 & réussi\\
+0.010 & 73.868 & 118.236 & réussi\\
+0.050 & 73.868 & 107.522 & réussi\\
+0.100 & 73.868 & 102.079 & réussi\\
 \hline
 \end{tabular}
 \caption{Tableau de $\chi^2$}
 \end{figure}
 
-Nous pouvons donc conclure, par les tests réussis, que le générateur suit lui aussi une loi uniforme.
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+tailles de séquences & Valeur attendue & Valeur observée\\
+\hline
+0 & 0 & 0\\
+1 & 0 & 0\\
+2 & 0 & 0\\
+3 & 0 & 0\\
+4 & 0 & 0\\
+5 & 0 & 0\\
+6 & 0 & 0\\
+7 & 0 & 0\\
+8 & 0 & 0\\
+9 & 0 & 0\\
+10 & 12.4123104 & 14\\
+11 & 55.8553968 & 50\\
+12 & 143.36218512 & 143\\
+13 & 276.48421416 & 308\\
+14 & 446.225041342 & 448\\
+15 & 637.388275044 & 664\\
+16 & 833.219654563 & 835\\
+17 & 1018.78288824 & 1041\\
+18 & 1182.74700171 & 1200\\
+19 & 1317.88196895 & 1306\\
+20 & 1420.73120363 & 1363\\
+21 & 1490.87768488 & 1487\\
+22 & 1530.09624166 & 1510\\
+23 & 1541.56340289 & 1505\\
+24 & 1529.20518241 & 1511\\
+25 & 1497.20483378 & 1489\\
+26 & 1449.66035738 & 1468\\
+27 & 1390.36703236 & 1349\\
+28 & 1322.6964252 & 1356\\
+29 & 1249.54516712 & 1258\\
+30 & 1173.33109073 & 1213\\
+31 & 1096.01922512 & 1121\\
+32 & 1019.16472433 & 1030\\
+33 & 943.963648157 & 986\\
+34 & 871.305536697 & 840\\
+35 & 801.823979808 & 799\\
+36 & 735.943003103 & 718\\
+37 & 673.918207697 & 693\\
+38 & 615.872336284 & 610\\
+39 & 561.825397292 & 545\\
+40 & 511.719744189 & 513\\
+41 & 465.440640647 & 478\\
+42 & 422.832890026 & 429\\
+43 & 383.714101716 & 384\\
+44 & 347.885130006 & 341\\
+45 & 315.138168089 & 311\\
+46 & 285.262920641 & 268\\
+47 & 258.051218976 & 288\\
+48 & 233.300386816 & 257\\
+49 & 210.815613907 & 199\\
+50 & 190.411549995 & 192\\
+\hline
+\end{tabular}
+\caption{Tableau de Test du CDC : Le générateur de python 1}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+tailles de séquences & Valeur attendue & Valeur observée\\
+\hline
+51 & 171.913293026 & 168\\
+52 & 155.156912567 & 158\\
+53 & 139.989621911 & 132\\
+54 & 126.269689408 & 109\\
+55 & 113.866160746 & 108\\
+56 & 102.658448515 & 111\\
+57 & 92.5358329026 & 86\\
+58 & 83.3969073366 & 78\\
+59 & 75.1489948263 & 84\\
+60 & 67.7075543596 & 60\\
+61 & 60.9955916463 & 71\\
+62 & 54.9430845192 & 51\\
+63 & 49.4864302002 & 36\\
+64 & 44.5679192395 & 44\\
+65 & 40.1352390904 & 37\\
+66 & 36.1410088909 & 38\\
+67 & 32.5423459723 & 39\\
+68 & 29.3004638536 & 30\\
+69 & 26.3803009227 & 20\\
+70 & 23.750178624 & 27\\
+71 & 21.3814877176 & 31\\
+72 & 19.2484010155 & 17\\
+73 & 17.327610923 & 17\\
+74 & 15.5980900853 & 17\\
+75 & 14.0408734536 & 11\\
+76 & 12.6388601309 & 12\\
+77 & 11.3766334208 & 11\\
+78 & 10.2402975805 & 14\\
+79 & 9.21732986548 & 9\\
+80 & 8.29644654244 & 7\\
+81 & 7.46748163938 & 5\\
+82 & 6.72127729064 & 5\\
+83 & 6.04958462373 & 2\\
+84 & 5.44497421806 & 5\\
+85 & 44.1179357995 & 35\\
+\hline
+\end{tabular}
+\caption{Tableau de Test du CDC : Le générateur de python 2}
+\end{figure}
+
+
+%\begin{figure}[h]
+%\centering
+%\includegraphics[scale=0.25]{../chart_images/test_du_cdc_:_le_generateur_de_python_bar_chart.png}
+%\caption{Graphique de Test du CDC : Le générateur de python}
+%\end{figure}
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|r|}
+\hline
+$\alpha$ & AValeur & Limite & Résultat\\
+\hline
+0.001 & 56.083 & 131.041 & réussi\\
+0.010 & 56.083 & 118.236 & réussi\\
+0.050 & 56.083 & 107.522 & réussi\\
+0.100 & 56.083 & 102.079 & réussi\\
+\hline
+\end{tabular}
+\caption{Tableau de $\chi^2$}
+\end{figure}
+
+
+Nous pouvons donc conclure, par les tests réussis, que 2 les générateurs suivent la loi uniforme.
+
+Nous pouvons aussi constater que le générateur de python réussit mieux les tests que notre générateur. 
   	
 	\newpage
 	\subsection{Interprétation des résultats}
@@ -725,14 +998,17 @@ Nous pouvons donc conclure, par les tests réussis, que le générateur suit lui
 	Cela peut s'expliquer par le fait que nous n'avons effectué nos tests que sur un nombre limité de nombres générés. 
 	En effet, la période de notre générateur est de 200 000 alors que la période du générateur de Python (Mersenne Twister) est de $2^{19937}$.
 	
-	D'après les tests effectués ci-dessus, ... % TODO
+	On constate aussi que sur certains tests, le générateur de python réussit mieux les tests que notre générateur. Sur d'autres, c'est l'inverse qui se produit.
+	
+	%TODO donner une conclusion sur les tests et pourquoi 
+	
+	On peut finalement conclure que les décimales de Pi, ainsi que nos deux générateurs suivent bien une loi uniforme d'après nos différents tests.	
 	
 	\newpage
 	\section{Conclusion}
 	Nous avons bien réalisé les objectifs fixés dans l'introduction, à savoir analyser le caractère aléatoire des décimales de pi, construire un générateur uniforme et le comparer au générateur par défaut de Python.
 	
-	Nous avons ainsi eu l'occasion de mettre en pratique et d'approfondir les concepts vus au cours théorique notamment les test de $\chi^2$, le test du poker, le test de Kolmogorov-Smirnov, ...
-	% TODO complete tests
+	Nous avons ainsi eu l'occasion de mettre en pratique et d'approfondir les concepts vus au cours théorique notamment les test de $\chi^2$, le test du poker, le test de Kolmogorov-Smirnov, le test de gap et le test du collectionneur de coupons.
 	
 	Nous tenons à remercier le titulaire BUYS Alain pour le dévouement dont il a fait preuve cette année.
 	
