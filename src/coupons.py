@@ -95,6 +95,6 @@ def do_test(name, digits ,limit=85):#good value to have a good test
 
 if __name__ == "__main__" :
 
-    #do_test("Les décimales de Pi",pi.get_digits())
-    #do_test("Le générateur de python",gen_python())
+    do_test("Les décimales de Pi",pi.get_digits())
+    do_test("Le générateur de python",gen_python())
     do_test("Notre générateur",gen_ours())
