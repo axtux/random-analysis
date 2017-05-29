@@ -299,7 +299,7 @@ Tailles de séquences & Valeur attendue & Valeur observée\\
 \caption{Tableau de Test du CDC : Les décimales de Pi 1}
 \end{figure}
 
-
+\newpage
 
 \begin{figure}[h]
 \centering
@@ -340,14 +340,13 @@ Tailles de séquences & Valeur attendue & Valeur observée\\
 \caption{Tableau de Test du CDC : Les décimales de Pi 3}
 \end{figure}
 
-%\begin{figure}[h]
-%\centering
-%\includegraphics[scale=0.25]{../chart_images/test_du_cdc_:_les_decimales_de_pi_bar_chart.png}
-%\caption{Graphique de Test du CDC : Les décimales de Pi}
-%\end{figure}
-
 \newpage
 
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{../chart_images/cdc_deci.png}
+\caption{Graphique de Test du CDC : Les décimales de Pi}
+\end{figure}
 
 
 \begin{figure}[h]
@@ -370,11 +369,12 @@ Nous remarquons que les valeurs du tableau sont proches des valeurs théoriques.
 
 Ce test confirme donc que les décimales de Pi suivent bien une loi uniforme, car les différents tests de $\chi^2$ sont respectés.
 
+\newpage
 
 \subsection{Interprétation des résultats}
 D'après les tests effectués ci-dessus, les décimales de pi suivent bien une loi uniforme.
-	
-	\newpage
+
+
 	\section{Générateur de loi uniforme à partir des décimales de $\pi$}
 	Notre générateur est très simple, il suit ces étapes :
 	\begin{enumerate}
@@ -648,9 +648,11 @@ En ce qui concerne ce générateur, nous avons procédé de la même façon que 
 	\caption{Tableau de Python Gap}
 \end{figure}
 
+\newpage
+
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.20]{../chart_images/python_gap_bar_chart.png}
+\includegraphics[scale=0.25]{../chart_images/python_gap_bar_chart.png}
 \caption{Graphique de Gap}
 \end{figure}
 
@@ -670,9 +672,12 @@ En ce qui concerne ce générateur, nous avons procédé de la même façon que 
 \end{figure}
 
 
-\newpage
-
 Nous observons, ici aussi, que les valeurs sont proches des valeurs théoriques et que le test de $\chi^2$  est réussi.
+
+\subsubsection{Comparaison}
+
+Les deux générateurs suivent une loi uniforme selon la réussite de ce test. 
+Nous observons aussi que notre générateur réussit mieux ce test que celui de python.
 
 \newpage
 
@@ -750,13 +755,13 @@ tailles de séquences  & Valeur attendue & Valeur observée\\
 \caption{Tableau de Test du CDC : Notre générateur 2}
 \end{figure}
 
+\newpage
 
-%\begin{figure}[h]
-%\centering
-%\includegraphics[scale=0.25]{../chart_images/test_du_cdc_:_notre_generateur_bar_chart.png}
-%\caption{Graphique de Test du CDC : Notre générateur}
-%\end{figure}
-
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.30]{../chart_images/cdc_ours.png}
+\caption{Graphique de Test du CDC : Notre générateur}
+\end{figure}
 
 \begin{figure}[h]
 \centering
@@ -827,11 +832,11 @@ tailles de séquences & Valeur attendue & Valeur observée\\
 \end{figure}
 \newpage
 
-%\begin{figure}[h]
-%\centering
-%\includegraphics[scale=0.25]{../chart_images/test_du_cdc_:_le_generateur_de_python_bar_chart.png}
-%\caption{Graphique de Test du CDC : Le générateur de python}
-%\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{../chart_images/cdc_py.png}
+\caption{Graphique de Test du CDC : Le générateur de python}
+\end{figure}
 
 \begin{figure}[h]
 \centering
