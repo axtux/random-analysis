@@ -67,5 +67,5 @@ def compare_test(n, a, b, limit) :
 
 if __name__ == "__main__" :
   # run test with 1.000.000 numbers, between 0 and 1/2, limit 15
-  compare_test(1000000, 0, 1/2., 15)
+  compare_test(10**6, 0, 1/2., 15)
   
