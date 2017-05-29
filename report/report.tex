@@ -588,7 +588,7 @@ Nous avons fixé la limite à 15 afin d'éviter les classes vides, ces dernière
 	\centering
 	\begin{tabular}{|r|r|r|}
 		\hline
-		APi Gap & Valeur attendue & Valeur observée\\
+		Pi Gap & Valeur attendue & Valeur observée\\
 		\hline
 		0 & 250101.000 & 250067\\
 		1 & 125050.500 & 125248\\
@@ -697,7 +697,11 @@ En ce qui concerne ce générateur, nous avons procédé de la même façon que 
 
 \newpage
 
+\subsubsection{Comparaison}
 Nous observons, ici aussi, que les valeurs sont proches des valeurs théoriques et que le test de $\chi^2$  est réussi.
+Les deux générateurs suivent une loi uniforme d'après ce test.
+Nous observons aussi que notre générateur réussit mieux ce test que celui de python.
+
 
 \newpage
 
@@ -709,7 +713,7 @@ Afin d'effectuer ce test comme précédemment, nous avons du avoir recourt à un
 
 Nous avons donc discrétiser 1 million de nombres générés aléatoirement par python entre 0 et 1. Nous avons aussi utilisé la même méthode sur notre générateur. \\
 
-Nous obtenons donc les tableaux de valeurs, les graphiques associés et les tests de $\chi^2$ suivants :
+Tableau de valeurs :
 
 \begin{figure}[h]
 \centering
@@ -738,19 +742,6 @@ tailles de séquences & Valeur attendue & Valeur observée\\
 28 & 1324.2818821 & 1339\\
 29 & 1251.0429409 & 1286\\
 30 & 1174.73751011 & 1165\\
-\hline
-\end{tabular}
-\caption{Tableau de Test du CDC : Notre générateur 1}
-\end{figure}
-
-\newpage
-
-\begin{figure}[h]
-\centering
-\begin{tabular}{|r|r|r|}
-\hline
-tailles de séquences  & Valeur attendue & Valeur observée\\
-\hline
 31 & 1097.33297423 & 1072\\
 32 & 1020.38635139 & 1005\\
 33 & 945.095135062 & 983\\
@@ -761,6 +752,19 @@ tailles de séquences  & Valeur attendue & Valeur observée\\
 38 & 616.610554842 & 625\\
 39 & 562.498832208 & 539\\
 40 & 512.333119704 & 508\\
+\hline
+\end{tabular}
+\caption{Tableau de Test du CDC : Notre générateur 1}
+\end{figure}
+
+\newpage
+Graphe :
+\begin{figure}[h]
+\centering
+\begin{tabular}{|r|r|r|}
+\hline
+tailles de séquences  & Valeur attendue & Valeur observée\\
+\hline
 50 & 190.639787783 & 188\\
 60 & 67.7887123695 & 80\\
 70 & 23.7786468984 & 23\\
@@ -776,13 +780,14 @@ tailles de séquences  & Valeur attendue & Valeur observée\\
 \end{figure}
 
 
-%\begin{figure}[h]
-%\centering
-%\includegraphics[scale=0.25]{../chart_images/test_du_cdc_:_notre_generateur_bar_chart.png}
-%\caption{Graphique de Test du CDC : Notre générateur}
-%\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{../chart_images/cdc_ours.png}
+\caption{Graphique de Test du CDC : Notre générateur}
+\end{figure}
 
-
+\newpage
+Tableau $\chi^2$ :
 \begin{figure}[h]
 \centering
 \begin{tabular}{|r|r|r|r|}
@@ -799,7 +804,7 @@ $\alpha$ & AValeur & Limite & Résultat\\
 \end{figure}
 
 \newpage
-
+Valeurs :
 \begin{figure}[h]
 \centering
 \begin{tabular}{|r|r|r|}
@@ -852,12 +857,14 @@ tailles de séquences & Valeur attendue & Valeur observée\\
 \end{figure}
 \newpage
 
-%\begin{figure}[h]
-%\centering
-%\includegraphics[scale=0.25]{../chart_images/test_du_cdc_:_le_generateur_de_python_bar_chartcdc_py.png}
-%\caption{Graphique de Test du CDC : Le générateur de python}
-%\end{figure}
+Graphe :
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{../chart_images/cdc_py.png}
+\caption{Graphique de Test du CDC : Le générateur de python}
+\end{figure}
 
+Test de $\chi^2$ :
 \begin{figure}[h]
 \centering
 \begin{tabular}{|r|r|r|r|}
