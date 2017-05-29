@@ -80,7 +80,7 @@
 
 	Nous avons utilisé deux librairies externes :
 	\begin{itemize}
-		\item \textbf{scipy} : pour l'accès à la table des valeurs critiques du $\chi^2$ ;
+		\item \textbf{scipy} : pour l'accès à la table des valeurs de Kolmogorov-Smirnov ;
 		\item \textbf{plotly} : pour réaliser les graphiques.
 	\end{itemize}
 	
@@ -370,9 +370,9 @@ Nous remarquons que les valeurs du tableau sont proches des valeurs théoriques.
 
 Ce test confirme donc que les décimales de Pi suivent bien une loi uniforme, car les différents tests de $\chi^2$ sont respectés.
 
-\newpage
+
 \subsection{Interprétation des résultats}
-D'après les tests effectués ci-dessus, les décimales de pi suivent une loi uniforme.
+D'après les tests effectués ci-dessus, les décimales de pi suivent bien une loi uniforme.
 	
 	\newpage
 	\section{Générateur de loi uniforme à partir des décimales de $\pi$}
@@ -414,7 +414,7 @@ D'après les tests effectués ci-dessus, les décimales de pi suivent une loi un
 	Bien qu'il existe des méthodes de correspondance, d'autres tests sont plus appropriés pour tester des fonctions continues.
 	Dans ces tests se trouve notamment le test de Kolmogorov-Smirnov.
 	
-	\newpage
+
 	\subsection{Test de Kolmogorov-Smirnov}
 	Le test de Kolmogorov-Smirnov est un test vérifiant si les valeurs générées pseudo-aléatoirement sont réparties uniformément entre 0 et 1.
 	
